@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enroll — Sante Lakay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B2540; --primary:#14477A; --primary-2:#1D5C99; --primary-tint:#E4EEF7; --primary-tint-2:#CFE0F0;
+    --accent:#E2A33B; --accent-2:#C9862A; --paper:#FBFAF7; --paper-2:#F3F1EA; --line:#D9E1E8; --white:#FFFFFF; --muted:#5A6B7B;
+    --error:#B3452C;
+    --display:'Fraunces', Georgia, serif; --body:'Inter', -apple-system, sans-serif; --mono:'IBM Plex Mono', monospace; --maxw:840px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:var(--body); color:var(--ink); background:var(--paper); line-height:1.55; -webkit-font-smoothing:antialiased;}
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer;}
+  input, select{font-family:inherit;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  h1,h2,h3{font-family:var(--display); font-weight:600; color:var(--ink); letter-spacing:-.01em;}
+  h2{font-size:clamp(24px,3vw,32px); line-height:1.2;}
+  h3{font-size:16.5px;}
+  p{color:var(--muted);}
+
+  header{border-bottom:1px solid var(--line); background:var(--white);}
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 24px; max-width:1180px; margin:0 auto;}
+  .logo{display:flex; align-items:center; gap:10px; font-family:var(--display); font-weight:700; font-size:19px;}
+  .logo-mark{width:28px; height:28px; flex-shrink:0;}
+  .exit-link{font-size:13.5px; font-weight:600; color:var(--muted); display:flex; align-items:center; gap:6px;}
+  .exit-link:hover{color:var(--primary);}
+
+  /* Progress bar */
+  .progress-wrap{background:var(--white); border-bottom:1px solid var(--line); padding:22px 0;}
+  .progress{display:flex; align-items:center; justify-content:space-between; max-width:640px; margin:0 auto; padding:0 24px;}
+  .p-step{display:flex; flex-direction:column; align-items:center; gap:8px; flex:1; position:relative;}
+  .p-step:not(:last-child)::after{content:''; position:absolute; top:13px; left:calc(50% + 22px); right:calc(-50% + 22px); height:1px; background:var(--line);}
+  .p-step.done:not(:last-child)::after{background:var(--accent);}
+  .p-circle{width:26px; height:26px; border-radius:50%; background:var(--white); border:1.5px solid var(--line); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:11.5px; font-weight:600; color:var(--muted); z-index:1;}
+  .p-step.active .p-circle{border-color:var(--primary); color:var(--primary); background:var(--primary-tint);}
+  .p-step.done .p-circle{border-color:var(--accent); background:var(--accent); color:#3A2408;}
+  .p-label{font-size:11.5px; font-weight:600; color:var(--muted); text-align:center;}
+  .p-step.active .p-label{color:var(--ink);}
+
+  main{padding:52px 0 100px;}
+  .step-panel{display:none;}
+  .step-panel.active{display:block;}
+  .eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--primary-2); font-weight:600; margin-bottom:10px;}
+  .step-head{margin-bottom:36px;}
+  .step-head p{margin-top:8px; font-size:15px;}
+
+  /* Plan cards */
+  .plan-pick-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px;}
+  .plan-pick{border:1.5px solid var(--line); background:var(--white); padding:24px; text-align:left; cursor:pointer; transition:border-color .15s ease;}
+  .plan-pick:hover{border-color:var(--primary-2);}
+  .plan-pick.selected{border-color:var(--primary); background:var(--primary-tint);}
+  .plan-pick .pp-name{font-family:var(--mono); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:600; margin-bottom:8px;}
+  .plan-pick .pp-price{font-family:var(--display); font-size:26px; font-weight:600; color:var(--ink);}
+  .plan-pick .pp-price span{font-family:var(--body); font-size:13px; color:var(--muted); font-weight:400;}
+  .plan-pick .pp-desc{font-size:13px; margin-top:6px;}
+  .short-toggle{display:flex; gap:8px; margin-bottom:20px;}
+  .short-toggle button{padding:8px 16px; border:1px solid var(--line); background:var(--white); font-size:13px; font-weight:600; color:var(--muted);}
+  .short-toggle button.active{border-color:var(--primary); color:var(--primary); background:var(--primary-tint);}
+
+  /* Family member cards */
+  .member-card{border:1px solid var(--line); background:var(--white); padding:22px; margin-bottom:14px; position:relative;}
+  .member-card .m-title{font-family:var(--mono); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--primary-2); font-weight:600; margin-bottom:16px;}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;}
+  .field-row.three{grid-template-columns:1.4fr 1fr 1fr;}
+  .field{display:flex; flex-direction:column; gap:6px;}
+  .field label{font-size:12.5px; font-weight:600; color:var(--ink);}
+  .field input, .field select{padding:11px 13px; border:1px solid var(--line); background:var(--paper); font-size:14.5px; color:var(--ink);}
+  .field input:focus, .field select:focus{outline:2px solid var(--primary-2); outline-offset:1px; background:var(--white);}
+  .remove-member{position:absolute; top:18px; right:18px; font-size:12px; color:var(--error); font-weight:600;}
+  .add-member{display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:var(--primary); padding:12px 0;}
+  .add-member svg{width:16px; height:16px; stroke:var(--primary);}
+  .member-limit-note{font-size:13px; margin-top:6px;}
+
+  /* Payment mock */
+  .card-visual{background:linear-gradient(135deg, var(--ink), var(--primary)); color:#fff; border-radius:4px; padding:26px; margin-bottom:28px; max-width:360px;}
+  .card-visual .cv-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:36px;}
+  .card-visual .cv-chip{width:34px; height:24px; background:rgba(255,255,255,.25); border-radius:3px;}
+  .card-visual .cv-num{font-family:var(--mono); font-size:16px; letter-spacing:2px; margin-bottom:16px;}
+  .card-visual .cv-bottom{display:flex; justify-content:space-between; font-size:11px; color:rgba(255,255,255,.7); font-family:var(--mono); text-transform:uppercase;}
+  .demo-banner{background:var(--primary-tint); border:1px solid var(--primary-tint-2); padding:14px 18px; font-size:13.5px; color:var(--primary-2); margin-bottom:28px; display:flex; gap:10px; align-items:flex-start;}
+  .demo-banner svg{width:16px; height:16px; stroke:var(--primary-2); flex-shrink:0; margin-top:2px;}
+
+  /* Summary */
+  .summary-box{border:1px solid var(--line); background:var(--white); padding:24px; margin-bottom:24px;}
+  .summary-row{display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--line); font-size:14.5px;}
+  .summary-row:last-child{border-bottom:none;}
+  .summary-row .label{color:var(--muted);}
+  .summary-row .value{color:var(--ink); font-weight:600; text-align:right;}
+  .summary-total{display:flex; justify-content:space-between; padding-top:16px; margin-top:6px; border-top:1.5px solid var(--ink); font-size:16px; font-weight:600;}
+
+  /* Buttons */
+  .step-nav{display:flex; justify-content:space-between; align-items:center; margin-top:38px; gap:16px;}
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:14px 26px; font-weight:600; font-size:14.5px; border:none; transition:transform .15s ease, background .15s ease;}
+  .btn-primary{background:var(--primary); color:#fff;}
+  .btn-primary:hover{background:var(--ink);}
+  .btn-primary:disabled{background:var(--line); color:var(--muted); cursor:not-allowed;}
+  .btn-text{background:none; color:var(--muted); font-weight:600; padding:14px 6px;}
+  .btn-text:hover{color:var(--ink);}
+  .error-text{color:var(--error); font-size:12.5px; margin-top:4px; display:none;}
+
+  /* Confirmation */
+  .confirm-wrap{text-align:center; padding:20px 0;}
+  .confirm-icon{width:64px; height:64px; border-radius:50%; background:var(--primary-tint); display:flex; align-items:center; justify-content:center; margin:0 auto 24px;}
+  .confirm-icon svg{width:30px; height:30px; stroke:var(--primary);}
+  .confirm-id{font-family:var(--mono); font-size:13px; color:var(--primary-2); background:var(--primary-tint); display:inline-block; padding:8px 16px; margin:18px 0;}
+
+  @media(max-width:640px){
+    .plan-pick-grid{grid-template-columns:1fr;}
+    .field-row, .field-row.three{grid-template-columns:1fr;}
+    .p-label{display:none;}
+    .step-nav{flex-direction:column-reverse; align-items:stretch;}
+    .step-nav .btn, .step-nav button{width:100%; justify-content:center;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <svg class="logo-mark" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="15" cy="15" r="14" stroke="#14477A" stroke-width="1.6"/>
+        <path d="M9 15.5C9 15.5 11.5 12 15 12C18.5 12 21 15.5 21 15.5" stroke="#E2A33B" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="9" cy="15.5" r="1.6" fill="#14477A"/><circle cx="21" cy="15.5" r="1.6" fill="#14477A"/>
+      </svg>
+      Sante Lakay
+    </a>
+    <a href="index.html" class="exit-link">✕ Exit enrollment</a>
+  </div>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress" id="progressBar">
+    <div class="p-step active" data-step="1"><span class="p-circle">1</span><span class="p-label">Plan</span></div>
+    <div class="p-step" data-step="2"><span class="p-circle">2</span><span class="p-label">Family</span></div>
+    <div class="p-step" data-step="3"><span class="p-circle">3</span><span class="p-label">Your Info</span></div>
+    <div class="p-step" data-step="4"><span class="p-circle">4</span><span class="p-label">Payment</span></div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+
+    <!-- STEP 1: PLAN -->
+    <section class="step-panel active" id="panel-1">
+      <div class="step-head">
+        <div class="eyebrow">Step 1 of 4</div>
+        <h2>Choose a membership plan</h2>
+        <p>You can change this later from your account once your member portal is active.</p>
+      </div>
+
+      <div class="short-toggle">
+        <button type="button" class="active" data-mode="monthly">Monthly Membership</button>
+        <button type="button" data-mode="short">Visiting Haiti (Short-Term)</button>
+      </div>
+
+      <div class="plan-pick-grid" id="monthlyPlans">
+        <button type="button" class="plan-pick" data-plan="individual" data-price="19.99" data-label="Individual — Monthly" data-people="1">
+          <div class="pp-name">Individual</div>
+          <div class="pp-price">$19.99<span>/mo</span></div>
+          <div class="pp-desc">Covers 1 family member in Haiti</div>
+        </button>
+        <button type="button" class="plan-pick" data-plan="family" data-price="29.99" data-label="Family / Group — Monthly" data-people="4">
+          <div class="pp-name">Family / Group</div>
+          <div class="pp-price">$29.99<span>/mo</span></div>
+          <div class="pp-desc">Covers up to 4 family members</div>
+        </button>
+      </div>
+
+      <div class="plan-pick-grid" id="shortPlans" style="display:none;">
+        <button type="button" class="plan-pick" data-plan="short10" data-price="14.99" data-label="10-Day Individual" data-people="1">
+          <div class="pp-name">10-Day Individual</div>
+          <div class="pp-price">$14.99<span>one-time</span></div>
+          <div class="pp-desc">Covers 1 visitor for 10 days</div>
+        </button>
+        <button type="button" class="plan-pick" data-plan="short30" data-price="39.99" data-label="1-Month Individual" data-people="1">
+          <div class="pp-name">1-Month Individual</div>
+          <div class="pp-price">$39.99<span>one-time</span></div>
+          <div class="pp-desc">Covers 1 visitor for 30 days</div>
+        </button>
+      </div>
+      <p class="error-text" id="err-plan">Please select a plan to continue.</p>
+
+      <div class="step-nav">
+        <span></span>
+        <button type="button" class="btn btn-primary" onclick="goToStep(2)">Continue</button>
+      </div>
+    </section>
+
+    <!-- STEP 2: FAMILY -->
+    <section class="step-panel" id="panel-2">
+      <div class="step-head">
+        <div class="eyebrow">Step 2 of 4</div>
+        <h2>Add your family in Haiti</h2>
+        <p>Enter the name and local Haiti phone number for each person you're covering. They'll receive a message in Kreyòl once enrollment is complete.</p>
+      </div>
+
+      <div id="membersList"></div>
+      <button type="button" class="add-member" id="addMemberBtn" onclick="addMember()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        Add another family member
+      </button>
+      <p class="member-limit-note" id="memberLimitNote"></p>
+      <p class="error-text" id="err-members">Please complete a name and phone number for each family member.</p>
+
+      <div class="step-nav">
+        <button type="button" class="btn btn-text" onclick="goToStep(1)">← Back</button>
+        <button type="button" class="btn btn-primary" onclick="validateAndGo(3)">Continue</button>
+      </div>
+    </section>
+
+    <!-- STEP 3: YOUR INFO -->
+    <section class="step-panel" id="panel-3">
+      <div class="step-head">
+        <div class="eyebrow">Step 3 of 4</div>
+        <h2>Your information</h2>
+        <p>This is who we'll contact about the membership — it doesn't need to match anyone in Haiti.</p>
+      </div>
+
+      <div class="member-card">
+        <div class="field-row">
+          <div class="field"><label for="yourName">Full name</label><input type="text" id="yourName" placeholder="Jean Baptiste"></div>
+          <div class="field"><label for="yourEmail">Email address</label><input type="email" id="yourEmail" placeholder="you@email.com"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="yourPhone">Your phone number</label><input type="tel" id="yourPhone" placeholder="+1 (555) 000-0000"></div>
+          <div class="field">
+            <label for="yourCountry">Country of residence</label>
+            <select id="yourCountry">
+              <option value="">Select a country</option>
+              <option>United States</option>
+              <option>Canada</option>
+              <option>France</option>
+              <option>Dominican Republic</option>
+              <option>Chile</option>
+              <option>Brazil</option>
+              <option>Bahamas</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <p class="error-text" id="err-info">Please fill in your name, email, and country to continue.</p>
+
+      <div class="step-nav">
+        <button type="button" class="btn btn-text" onclick="goToStep(2)">← Back</button>
+        <button type="button" class="btn btn-primary" onclick="validateAndGo(4)">Continue</button>
+      </div>
+    </section>
+
+    <!-- STEP 4: PAYMENT / REVIEW -->
+    <section class="step-panel" id="panel-4">
+      <div class="step-head">
+        <div class="eyebrow">Step 4 of 4</div>
+        <h2>Review & payment</h2>
+        <p>Confirm your details below before completing enrollment.</p>
+      </div>
+
+      <div class="summary-box" id="summaryBox"></div>
+
+      <div class="demo-banner">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+        <span>This is a frontend preview. Payment processing isn't connected yet — no card will be charged. This screen shows how billing will work once our backend is live.</span>
+      </div>
+
+      <div class="card-visual">
+        <div class="cv-top"><div class="cv-chip"></div><span style="font-family:var(--mono); font-size:12px;">SANTE LAKAY</span></div>
+        <div class="cv-num" id="cardNumDisplay">•••• •••• •••• ••••</div>
+        <div class="cv-bottom"><span id="cardNameDisplay">CARDHOLDER NAME</span><span id="cardExpDisplay">MM/YY</span></div>
+      </div>
+
+      <div class="member-card">
+        <div class="field-row">
+          <div class="field" style="grid-column:1/-1;"><label for="cardName">Name on card</label><input type="text" id="cardName" placeholder="Jean Baptiste" oninput="updateCardVisual()"></div>
+        </div>
+        <div class="field-row three">
+          <div class="field"><label for="cardNumber">Card number</label><input type="text" id="cardNumber" maxlength="19" placeholder="4242 4242 4242 4242" oninput="updateCardVisual()"></div>
+          <div class="field"><label for="cardExp">Expiry</label><input type="text" id="cardExp" maxlength="5" placeholder="MM/YY" oninput="updateCardVisual()"></div>
+          <div class="field"><label for="cardCvv">CVV</label><input type="text" id="cardCvv" maxlength="4" placeholder="123"></div>
+        </div>
+      </div>
+      <p class="error-text" id="err-payment">Please fill in your card details to complete enrollment (demo only — nothing is charged).</p>
+
+      <div class="step-nav">
+        <button type="button" class="btn btn-text" onclick="goToStep(3)">← Back</button>
+        <button type="button" class="btn btn-primary" onclick="completeEnrollment()">Complete Enrollment</button>
+      </div>
+    </section>
+
+    <!-- CONFIRMATION -->
+    <section class="step-panel" id="panel-confirm">
+      <div class="confirm-wrap">
+        <div class="confirm-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <h2>Your family is covered.</h2>
+        <p style="max-width:440px; margin:12px auto 0;">A confirmation email is on its way, and each family member will receive a text message in Kreyòl explaining their new coverage.</p>
+        <div class="confirm-id" id="confirmId">MEMBER ID — PENDING BACKEND</div>
+        <div class="summary-box" id="confirmSummary" style="text-align:left; max-width:440px; margin:24px auto;"></div>
+        <a href="index.html" class="btn btn-primary" style="margin-top:8px;">Return to Homepage</a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script>
+const state = {
+  mode: 'monthly',
+  plan: null,
+  planLabel: '',
+  planPrice: 0,
+  peopleAllowed: 1,
+  members: [],
+  info: {}
+};
+
+// Preselect plan from URL (?plan=individual or ?plan=family)
+const urlParams = new URLSearchParams(window.location.search);
+const preselect = urlParams.get('plan');
+
+function goToStep(n){
+  document.querySelectorAll('.step-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-' + n).classList.add('active');
+  document.querySelectorAll('.p-step').forEach(s=>{
+    const step = parseInt(s.getAttribute('data-step'));
+    s.classList.remove('active','done');
+    if(step < n) s.classList.add('done');
+    if(step === n) s.classList.add('active');
+  });
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// --- STEP 1: Plan selection ---
+document.querySelectorAll('.short-toggle button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.short-toggle button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const mode = btn.getAttribute('data-mode');
+    state.mode = mode;
+    document.getElementById('monthlyPlans').style.display = mode === 'monthly' ? 'grid' : 'none';
+    document.getElementById('shortPlans').style.display = mode === 'short' ? 'grid' : 'none';
+  });
+});
+
+document.querySelectorAll('.plan-pick').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    document.querySelectorAll('.plan-pick').forEach(c=>c.classList.remove('selected'));
+    card.classList.add('selected');
+    state.plan = card.getAttribute('data-plan');
+    state.planLabel = card.getAttribute('data-label');
+    state.planPrice = parseFloat(card.getAttribute('data-price'));
+    state.peopleAllowed = parseInt(card.getAttribute('data-people'));
+    document.getElementById('err-plan').style.display = 'none';
+    renderMemberLimitNote();
+  });
+});
+
+function renderMemberLimitNote(){
+  const note = document.getElementById('memberLimitNote');
+  if(state.plan === 'family'){
+    note.textContent = 'Family plan includes up to 4 members. Additional members can be added for $5/mo each.';
+  } else if(state.peopleAllowed){
+    note.textContent = 'This plan covers ' + state.peopleAllowed + ' family member.';
+  } else {
+    note.textContent = '';
+  }
+}
+
+const origGoToStep = goToStep;
+goToStep = function(n){
+  if(n === 2){
+    if(!state.plan){
+      document.getElementById('err-plan').style.display = 'block';
+      return;
+    }
+    if(state.members.length === 0){ addMember(); }
+  }
+  origGoToStep(n);
+};
+
+// --- STEP 2: Family members ---
+let memberCount = 0;
+function addMember(){
+  memberCount++;
+  const id = 'member-' + memberCount;
+  state.members.push({id, name:'', relationship:'', phone:''});
+  const wrap = document.createElement('div');
+  wrap.className = 'member-card';
+  wrap.id = id;
+  wrap.innerHTML = `
+    <div class="m-title">Family Member ${memberCount}</div>
+    ${memberCount > 1 ? `<button type="button" class="remove-member" onclick="removeMember('${id}')">Remove</button>` : ''}
+    <div class="field-row three">
+      <div class="field"><label>Full name</label><input type="text" placeholder="Marie Joseph" oninput="updateMember('${id}','name',this.value)"></div>
+      <div class="field"><label>Relationship</label><input type="text" placeholder="Mother" oninput="updateMember('${id}','relationship',this.value)"></div>
+      <div class="field"><label>Phone number (Haiti)</label><input type="tel" placeholder="+509 00 00 0000" oninput="updateMember('${id}','phone',this.value)"></div>
+    </div>
+  `;
+  document.getElementById('membersList').appendChild(wrap);
+}
+function removeMember(id){
+  state.members = state.members.filter(m => m.id !== id);
+  document.getElementById(id).remove();
+}
+function updateMember(id, field, value){
+  const m = state.members.find(m => m.id === id);
+  if(m) m[field] = value;
+}
+
+function validateAndGo(n){
+  if(n === 3){
+    const incomplete = state.members.some(m => !m.name || !m.phone);
+    if(state.members.length === 0 || incomplete){
+      document.getElementById('err-members').style.display = 'block';
+      return;
+    }
+    document.getElementById('err-members').style.display = 'none';
+  }
+  if(n === 4){
+    const name = document.getElementById('yourName').value;
+    const email = document.getElementById('yourEmail').value;
+    const country = document.getElementById('yourCountry').value;
+    if(!name || !email || !country){
+      document.getElementById('err-info').style.display = 'block';
+      return;
+    }
+    document.getElementById('err-info').style.display = 'none';
+    state.info = {
+      name, email, country,
+      phone: document.getElementById('yourPhone').value
+    };
+    renderSummary();
+  }
+  goToStep(n);
+}
+
+// --- STEP 4: Payment visual + summary ---
+function updateCardVisual(){
+  const num = document.getElementById('cardNumber').value;
+  const name = document.getElementById('cardName').value;
+  const exp = document.getElementById('cardExp').value;
+  document.getElementById('cardNumDisplay').textContent = num ? num.replace(/(.{4})/g,'$1 ').trim() : '•••• •••• •••• ••••';
+  document.getElementById('cardNameDisplay').textContent = name ? name.toUpperCase() : 'CARDHOLDER NAME';
+  document.getElementById('cardExpDisplay').textContent = exp || 'MM/YY';
+}
+
+function renderSummary(){
+  const box = document.getElementById('summaryBox');
+  const membersHtml = state.members.map(m =>
+    `<div class="summary-row"><span class="label">${m.name || 'Family member'} (${m.relationship || '—'})</span><span class="value">${m.phone || '—'}</span></div>`
+  ).join('');
+  box.innerHTML = `
+    <div class="summary-row"><span class="label">Plan</span><span class="value">${state.planLabel}</span></div>
+    <div class="summary-row"><span class="label">Enrolled by</span><span class="value">${state.info.name} — ${state.info.country}</span></div>
+    ${membersHtml}
+    <div class="summary-total"><span>Total ${state.mode === 'monthly' ? 'today' : ''}</span><span>$${state.planPrice.toFixed(2)}${state.mode === 'monthly' ? '/mo' : ''}</span></div>
+  `;
+}
+
+function completeEnrollment(){
+  const num = document.getElementById('cardNumber').value;
+  const name = document.getElementById('cardName').value;
+  const exp = document.getElementById('cardExp').value;
+  const cvv = document.getElementById('cardCvv').value;
+  if(!num || !name || !exp || !cvv){
+    document.getElementById('err-payment').style.display = 'block';
+    return;
+  }
+  document.getElementById('err-payment').style.display = 'none';
+
+  const fakeId = 'SL-' + Math.floor(100000 + Math.random()*900000);
+  document.getElementById('confirmId').textContent = 'Membership ID (demo): ' + fakeId;
+
+  const membersHtml = state.members.map(m =>
+    `<div class="summary-row"><span class="label">${m.name || 'Family member'}</span><span class="value">${m.phone || '—'}</span></div>`
+  ).join('');
+  document.getElementById('confirmSummary').innerHTML = `
+    <div class="summary-row"><span class="label">Plan</span><span class="value">${state.planLabel}</span></div>
+    ${membersHtml}
+  `;
+
+  document.querySelectorAll('.step-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-confirm').classList.add('active');
+  document.getElementById('progressBar').style.display = 'none';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// Apply preselected plan from URL on load
+if(preselect === 'individual' || preselect === 'family'){
+  window.addEventListener('DOMContentLoaded', ()=>{
+    const card = document.querySelector(`.plan-pick[data-plan="${preselect}"]`);
+    if(card) card.click();
+  });
+}
+</script>
+</body>
+</html>

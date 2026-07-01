@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sante Lakay — Health care that crosses the water with you</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B2540;
+    --primary:#14477A;
+    --primary-2:#1D5C99;
+    --primary-tint:#E4EEF7;
+    --primary-tint-2:#CFE0F0;
+    --accent:#E2A33B;
+    --accent-2:#C9862A;
+    --paper:#FBFAF7;
+    --paper-2:#F3F1EA;
+    --line:#D9E1E8;
+    --white:#FFFFFF;
+    --muted:#5A6B7B;
+    --radius:2px;
+    --display:'Fraunces', Georgia, serif;
+    --body:'Inter', -apple-system, sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--body);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--primary-2); font-weight:600; display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--accent);}
+  h1,h2,h3{font-family:var(--display); font-weight:600; color:var(--ink); letter-spacing:-.01em;}
+  h1{font-size:clamp(38px,5.6vw,68px); line-height:1.04; font-weight:600;}
+  h2{font-size:clamp(28px,3.6vw,42px); line-height:1.12;}
+  h3{font-size:20px; line-height:1.3;}
+  p{color:var(--muted);}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px; padding:15px 28px; font-weight:600; font-size:15px;
+    border-radius:var(--radius); transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--primary); color:var(--white);}
+  .btn-primary:hover{background:var(--ink); transform:translateY(-1px);}
+  .btn-ghost{background:transparent; color:var(--primary); border:1px solid var(--primary-tint-2);}
+  .btn-ghost:hover{border-color:var(--primary); background:var(--primary-tint);}
+  .btn-accent{background:var(--accent); color:#3A2408;}
+  .btn-accent:hover{background:var(--accent-2); transform:translateY(-1px);}
+
+  /* ---- Header ---- */
+  header{
+    position:sticky; top:0; z-index:100; background:rgba(251,250,247,.92); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 32px; max-width:var(--maxw); margin:0 auto;}
+  .logo{display:flex; align-items:center; gap:10px; font-family:var(--display); font-weight:700; font-size:20px; letter-spacing:-.01em;}
+  .logo-mark{width:30px; height:30px; flex-shrink:0;}
+  .nav-links{display:flex; align-items:center; gap:34px;}
+  .nav-links a{font-size:14.5px; font-weight:500; color:var(--ink); position:relative; padding:4px 0;}
+  .nav-links a:hover{color:var(--primary);}
+  .nav-right{display:flex; align-items:center; gap:16px;}
+  .lang-switch{position:relative;}
+  .lang-btn{
+    display:flex; align-items:center; gap:6px; font-size:13px; font-weight:600; font-family:var(--mono);
+    padding:8px 12px; border:1px solid var(--line); border-radius:var(--radius); color:var(--ink);
+  }
+  .lang-btn:hover{border-color:var(--primary);}
+  .lang-menu{
+    position:absolute; top:calc(100% + 8px); right:0; background:var(--white); border:1px solid var(--line);
+    box-shadow:0 12px 28px rgba(11,37,64,.12); min-width:170px; display:none; z-index:50;
+  }
+  .lang-menu.open{display:block;}
+  .lang-menu button{display:flex; width:100%; align-items:center; justify-content:space-between; padding:11px 14px; font-size:13.5px; text-align:left;}
+  .lang-menu button:hover{background:var(--primary-tint);}
+  .lang-menu button.active{color:var(--primary); font-weight:700;}
+  .burger{display:none; flex-direction:column; gap:5px; padding:6px;}
+  .burger span{width:22px; height:2px; background:var(--ink);}
+
+  /* ---- Hero ---- */
+  .hero{padding:88px 0 60px; position:relative; overflow:hidden;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:center;}
+  .hero h1{margin-bottom:22px;}
+  .hero h1 em{font-style:italic; color:var(--primary);}
+  .hero p.lead{font-size:18px; max-width:480px; margin-bottom:34px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:48px;}
+  .hero-stats{display:flex; gap:36px; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:26px;}
+  .stat-num{font-family:var(--mono); font-weight:600; font-size:22px; color:var(--primary); display:block;}
+  .stat-label{font-size:12.5px; color:var(--muted); max-width:140px; display:block; margin-top:4px;}
+
+  /* signature lifeline graphic */
+  .lifeline-card{
+    background:var(--primary); border-radius:4px; padding:44px 34px; position:relative; color:var(--white); overflow:hidden;
+    min-height:420px; display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .lifeline-card::before{
+    content:''; position:absolute; inset:0; background:radial-gradient(circle at 80% 10%, rgba(255,255,255,.08), transparent 55%);
+  }
+  .lifeline-tag{font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--primary-tint-2); position:relative;}
+  .lifeline-svg{width:100%; height:auto; position:relative;}
+  .pulse{animation:pulse 2.6s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:.35; r:5;} 50%{opacity:1; r:8;}}
+  .dashflow{stroke-dasharray:6 8; animation:dash 1.6s linear infinite;}
+  @keyframes dash{to{stroke-dashoffset:-28;}}
+  .lifeline-caption{font-size:14px; color:rgba(255,255,255,.82); position:relative; line-height:1.6;}
+  .lifeline-caption strong{color:var(--white); font-family:var(--display); font-size:17px; display:block; margin-bottom:6px; font-weight:600;}
+
+  /* ---- Section shells ---- */
+  section{padding:96px 0;}
+  .section-alt{background:var(--white); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .section-tint{background:var(--primary-tint);}
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head.center{margin-left:auto; margin-right:auto; text-align:center;}
+
+  /* ---- About ---- */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start;}
+  .about-points{display:flex; flex-direction:column; gap:28px; margin-top:8px;}
+  .about-point{display:flex; gap:18px;}
+  .point-icon{width:40px; height:40px; flex-shrink:0; border-radius:50%; background:var(--primary-tint); display:flex; align-items:center; justify-content:center;}
+  .point-icon svg{width:20px; height:20px; stroke:var(--primary);}
+
+  /* ---- How it works ---- */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--line); background:var(--line);}
+  .step{background:var(--paper); padding:44px 36px; position:relative;}
+  .step-num{font-family:var(--display); font-size:15px; font-weight:600; color:var(--accent-2); font-style:italic; margin-bottom:22px; display:block;}
+  .step h3{margin-bottom:12px;}
+  .step p{font-size:14.5px;}
+
+  /* ---- Included services ---- */
+  .services-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .service-card{background:var(--white); padding:30px 24px; display:flex; flex-direction:column; gap:14px;}
+  .service-card svg{width:24px; height:24px; stroke:var(--primary);}
+  .service-card h3{font-size:16px;}
+  .service-card p{font-size:13.5px;}
+
+  /* ---- Plans ---- */
+  .plans-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+  .plan-card{background:var(--white); border:1px solid var(--line); padding:40px 36px; display:flex; flex-direction:column;}
+  .plan-card.featured{border-color:var(--primary); box-shadow:0 20px 40px rgba(20,71,122,.1); position:relative;}
+  .plan-badge{position:absolute; top:-13px; left:36px; background:var(--accent); color:#3A2408; font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; font-weight:700; padding:5px 12px;}
+  .plan-name{font-family:var(--mono); font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-bottom:10px;}
+  .plan-price{display:flex; align-items:baseline; gap:8px; margin-bottom:4px;}
+  .plan-price .num{font-family:var(--display); font-size:44px; font-weight:600; color:var(--ink);}
+  .plan-price .per{font-size:14px; color:var(--muted);}
+  .plan-people{font-size:13.5px; color:var(--primary-2); font-weight:600; margin-bottom:24px;}
+  .plan-features{display:flex; flex-direction:column; gap:12px; margin-bottom:30px; flex:1;}
+  .plan-features li{display:flex; gap:10px; font-size:14.5px; color:var(--ink); align-items:flex-start;}
+  .plan-features svg{width:16px; height:16px; stroke:var(--accent-2); flex-shrink:0; margin-top:3px;}
+  .plans-note{margin-top:28px; font-size:13.5px; text-align:center; color:var(--muted);}
+
+  /* ---- Why choose ---- */
+  .why-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:2px; background:var(--line); border:1px solid var(--line);}
+  .why-card{background:var(--primary); color:var(--white); padding:40px; display:flex; flex-direction:column; gap:14px;}
+  .why-card:nth-child(odd){background:var(--ink);}
+  .why-card svg{width:26px; height:26px; stroke:var(--accent);}
+  .why-card h3{color:var(--white);}
+  .why-card p{color:rgba(255,255,255,.72); font-size:14.5px;}
+
+  /* ---- FAQ ---- */
+  .faq-list{max-width:760px; margin:0 auto;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{display:flex; justify-content:space-between; align-items:center; padding:24px 4px; font-family:var(--display); font-size:18px; font-weight:600; cursor:pointer;}
+  .faq-q .plus{font-family:var(--mono); font-size:20px; color:var(--primary); transition:transform .2s ease;}
+  details[open] .faq-q .plus{transform:rotate(45deg);}
+  .faq-a{padding:0 4px 24px; font-size:15px; max-width:640px;}
+  summary::-webkit-details-marker{display:none;}
+  summary{list-style:none;}
+
+  /* ---- CTA banner ---- */
+  .cta-banner{background:var(--ink); color:var(--white); text-align:center; padding:96px 0; position:relative; overflow:hidden;}
+  .cta-banner::before{content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 0%, rgba(226,163,59,.14), transparent 60%);}
+  .cta-banner h2{color:var(--white); max-width:680px; margin:0 auto 18px; position:relative;}
+  .cta-banner p{color:rgba(255,255,255,.7); max-width:520px; margin:0 auto 36px; position:relative;}
+  .cta-banner .btn-row{display:flex; gap:16px; justify-content:center; position:relative; flex-wrap:wrap;}
+
+  /* ---- Footer ---- */
+  footer{background:var(--paper-2); padding:64px 0 28px; border-top:1px solid var(--line);}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:52px;}
+  .footer-brand p{font-size:14px; max-width:260px; margin-top:14px;}
+  .footer-col h4{font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:18px; font-weight:600;}
+  .footer-col a{display:block; font-size:14px; color:var(--ink); margin-bottom:11px;}
+  .footer-col a:hover{color:var(--primary);}
+  .footer-bottom{display:flex; justify-content:space-between; align-items:center; padding-top:26px; border-top:1px solid var(--line); font-size:12.5px; color:var(--muted); flex-wrap:wrap; gap:12px;}
+  .footer-langs{display:flex; gap:14px;}
+  .footer-langs button{font-family:var(--mono); font-size:12px; color:var(--muted); font-weight:600;}
+  .footer-langs button.active{color:var(--primary);}
+
+  @media(max-width:920px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .hero-grid{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr; gap:40px;}
+    .steps{grid-template-columns:1fr;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .plans-grid{grid-template-columns:1fr;}
+    .why-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr; row-gap:36px;}
+    section{padding:64px 0;}
+    .hero{padding:48px 0 40px;}
+  }
+  @media(max-width:520px){
+    .footer-grid{grid-template-columns:1fr;}
+    .hero-stats{gap:24px;}
+    .wrap{padding:0 20px;}
+    .nav{padding:16px 20px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .pulse, .dashflow{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="#top" class="logo">
+      <svg class="logo-mark" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="15" cy="15" r="14" stroke="#14477A" stroke-width="1.6"/>
+        <path d="M9 15.5C9 15.5 11.5 12 15 12C18.5 12 21 15.5 21 15.5" stroke="#E2A33B" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="9" cy="15.5" r="1.6" fill="#14477A"/>
+        <circle cx="21" cy="15.5" r="1.6" fill="#14477A"/>
+      </svg>
+      Sante Lakay
+    </a>
+    <nav class="nav-links">
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="how-it-works.html" data-i18n="nav.how">How It Works</a>
+      <a href="plans.html" data-i18n="nav.plans">Plans</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <a href="enroll.html" class="btn btn-primary" data-i18n="nav.enroll">Enroll Now</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow" data-i18n="hero.eyebrow">Medical Membership for the Haitian Diaspora</div>
+        <h1 data-i18n="hero.title">Your family in Haiti is never <em>alone.</em></h1>
+        <p class="lead" data-i18n="hero.lead">A monthly membership from anywhere in the world that gives your loved ones in Haiti immediate access to 24/7 emergency medical coordination, ambulance dispatch, and medical evacuation — the moment they need it.</p>
+        <div class="hero-ctas">
+          <a href="plans.html" class="btn btn-primary" data-i18n="hero.cta1">See Membership Plans</a>
+          <a href="how-it-works.html" class="btn btn-ghost" data-i18n="hero.cta2">How It Works</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <span class="stat-num">24/7</span>
+            <span class="stat-label" data-i18n="hero.stat1">Emergency medical coordination</span>
+          </div>
+          <div>
+            <span class="stat-num">Air · Ground</span>
+            <span class="stat-label" data-i18n="hero.stat2">Ambulance & evacuation network</span>
+          </div>
+          <div>
+            <span class="stat-num">EN · HT · FR · ES</span>
+            <span class="stat-label" data-i18n="hero.stat3">Support in your language</span>
+          </div>
+        </div>
+      </div>
+      <div class="lifeline-card">
+        <div class="lifeline-tag" data-i18n="hero.card.tag">Live connection</div>
+        <svg class="lifeline-svg" viewBox="0 0 320 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="34" y1="70" x2="286" y2="70" stroke="rgba(255,255,255,.25)" stroke-width="1.4"/>
+          <line class="dashflow" x1="34" y1="70" x2="286" y2="70" stroke="#E2A33B" stroke-width="1.6"/>
+          <circle class="pulse" cx="34" cy="70" r="6" fill="#E2A33B"/>
+          <circle cx="34" cy="70" r="3" fill="#FBFAF7"/>
+          <circle class="pulse" cx="286" cy="70" r="6" fill="#FBFAF7" style="animation-delay:1.3s"/>
+          <circle cx="286" cy="70" r="3" fill="#E2A33B"/>
+          <text x="10" y="110" fill="rgba(255,255,255,.65)" font-family="IBM Plex Mono" font-size="10" letter-spacing="1">DIASPORA</text>
+          <text x="236" y="110" fill="rgba(255,255,255,.65)" font-family="IBM Plex Mono" font-size="10" letter-spacing="1">HAITI</text>
+        </svg>
+        <div class="lifeline-caption">
+          <strong data-i18n="hero.card.title">One membership. One lifeline.</strong>
+          <span data-i18n="hero.card.body">Wherever you live — Miami, Montréal, Paris, Santo Domingo — your enrollment keeps a direct line open to emergency care for the people you love.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section-alt">
+    <div class="wrap about-grid">
+      <div>
+        <div class="eyebrow" data-i18n="about.eyebrow">What Is Sante Lakay</div>
+        <h2 data-i18n="about.title">Peace of mind, delivered across the water.</h2>
+        <p style="margin-top:20px; font-size:16px;" data-i18n="about.body">Sante Lakay ("Home Health") is a medical membership built for Haitians living abroad. You enroll and pay from wherever you are — the United States, Canada, France, the Dominican Republic, anywhere. Your family in Haiti gets a direct line to emergency medical support whenever they need it, backed by a dispatch center and a network of ambulance, air, and ground rescue partners on the ground in Haiti.</p>
+      </div>
+      <div class="about-points">
+        <div class="about-point">
+          <div class="point-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.5-9.2C.7 8.1 2.4 4.5 6 4.1c2-.2 3.6.8 4.9 2.3.4.5 1 .5 1.4 0C13.6 4.9 15.2 3.9 17.2 4.1c3.6.4 5.3 4 3.5 7.7C18.1 16.4 12 21 12 21Z"/></svg></div>
+          <div><h3 data-i18n="about.point1.title">Built on family, not just coverage</h3><p data-i18n="about.point1.body">Haitian culture is collectivist — caring for family abroad is an honor, not an obligation. Sante Lakay gives that instinct a reliable system.</p></div>
+        </div>
+        <div class="about-point">
+          <div class="point-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></div>
+          <div><h3 data-i18n="about.point2.title">Ready from day one</h3><p data-i18n="about.point2.body">No waiting rooms, no bureaucracy to navigate from abroad. Enrollment takes minutes and coverage activates immediately.</p></div>
+        </div>
+        <div class="about-point">
+          <div class="point-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4Z"/></svg></div>
+          <div><h3 data-i18n="about.point3.title">A trusted local network</h3><p data-i18n="about.point3.body">Our dispatch center and rescue partners are based in Port-au-Prince, with a growing Guardian Network of medical professionals in rural regions.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head center">
+        <div class="eyebrow" style="justify-content:center;" data-i18n="how.eyebrow">How It Works</div>
+        <h2 data-i18n="how.title">Three steps, from anywhere in the world.</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">01</span>
+          <h3 data-i18n="how.step1.title">Choose a plan</h3>
+          <p data-i18n="how.step1.body">Pick an Individual or Group membership based on how many family members in Haiti you want covered.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <h3 data-i18n="how.step2.title">Add your family</h3>
+          <p data-i18n="how.step2.body">Enter their names and phone numbers in Haiti. They'll receive a message in Kreyòl explaining their new coverage and who to call.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <h3 data-i18n="how.step3.title">We're on call, 24/7</h3>
+          <p data-i18n="how.step3.body">Your membership renews automatically. If a medical emergency happens, your family calls one number — day or night.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INCLUDED -->
+  <section class="section-tint">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="included.eyebrow">What's Included</div>
+        <h2 data-i18n="included.title">Every membership includes.</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <h3 data-i18n="included.s1.title">24/7 Emergency Coordination</h3>
+          <p data-i18n="included.s1.body">A dispatch center standing by around the clock, every day of the year.</p>
+        </div>
+        <div class="service-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h13v-5H8l-3 5ZM16 12h4l2 3v2h-6"/><circle cx="7" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg>
+          <h3 data-i18n="included.s2.title">Ground Ambulance Service</h3>
+          <p data-i18n="included.s2.body">Rapid ground transport to the nearest appropriate facility.</p>
+        </div>
+        <div class="service-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2 5h5l-4 4 1.5 5.5L12 13l-4.5 3.5L9 11 5 7h5l2-5Z"/></svg>
+          <h3 data-i18n="included.s3.title">Air & Fixed-Wing Evacuation</h3>
+          <p data-i18n="included.s3.body">Helicopter and airplane evacuation for cases requiring a higher level of care.</p>
+        </div>
+        <div class="service-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.5-9.2C.7 8.1 2.4 4.5 6 4.1c2-.2 3.6.8 4.9 2.3.4.5 1 .5 1.4 0C13.6 4.9 15.2 3.9 17.2 4.1c3.6.4 5.3 4 3.5 7.7C18.1 16.4 12 21 12 21Z"/></svg>
+          <h3 data-i18n="included.s4.title">Transfers to Higher Care</h3>
+          <p data-i18n="included.s4.body">Coordinated transfer between facilities when specialist care is needed.</p>
+        </div>
+        <div class="service-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+          <h3 data-i18n="included.s5.title">Patient Advocacy</h3>
+          <p data-i18n="included.s5.body">Someone in your family's corner, coordinating care and communicating with hospitals.</p>
+        </div>
+        <div class="service-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c0 3-3 5-7 5s-7-2-7-5 3-5 7-5 7 2 7 5Z"/><path d="M12 9V3M9 5l3-2 3 2"/></svg>
+          <h3 data-i18n="included.s6.title">Hospital & Specialist Access</h3>
+          <p data-i18n="included.s6.body">Coordination with hospitals and specialists across our care network.</p>
+        </div>
+        <div class="service-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
+          <h3 data-i18n="included.s7.title">Rapid Response</h3>
+          <p data-i18n="included.s7.body">A dispatch process built for speed when every minute counts.</p>
+        </div>
+        <div class="service-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
+          <h3 data-i18n="included.s8.title">Emergency Medical Assistance</h3>
+          <p data-i18n="included.s8.body">Guidance and support for your family from the very first call.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section id="plans" class="section-alt">
+    <div class="wrap">
+      <div class="section-head center">
+        <div class="eyebrow" style="justify-content:center;" data-i18n="plans.eyebrow">Membership Plans</div>
+        <h2 data-i18n="plans.title">Simple pricing. Real protection.</h2>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card">
+          <div class="plan-name" data-i18n="plans.individual.name">Individual</div>
+          <div class="plan-price"><span class="num">$19.99</span><span class="per" data-i18n="plans.individual.per">/ month</span></div>
+          <div class="plan-people" data-i18n="plans.individual.people">Covers 1 family member in Haiti</div>
+          <ul class="plan-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="plans.individual.f1">24/7 medical support</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="plans.individual.f2">Ambulance & rescue coverage</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="plans.individual.f3">1 in-country evacuation flight</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="plans.individual.f4">2 ground ambulance transports</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="plans.individual.f5">Patient advocacy</span></li>
+          </ul>
+          <a href="enroll.html?plan=individual" class="btn btn-ghost" style="justify-content:center;" data-i18n="plans.cta">Enroll Now</a>
+        </div>
+        <div class="plan-card featured">
+          <div class="plan-badge" data-i18n="plans.family.badge">Most Popular</div>
+          <div class="plan-name" data-i18n="plans.family.name">Family / Group</div>
+          <div class="plan-price"><span class="num">$29.99</span><span class="per" data-i18n="plans.family.per">/ month</span></div>
+          <div class="plan-people" data-i18n="plans.family.people">Covers up to 4 family members in Haiti</div>
+          <ul class="plan-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="plans.family.f1">24/7 medical support</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="plans.family.f2">Ambulance & rescue coverage</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="plans.family.f3">2 in-country evacuation flights</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="plans.family.f4">4 ground ambulance transports</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="plans.family.f5">Patient advocacy</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="plans.family.f6">Add up to 2 more members, $5/mo each</span></li>
+          </ul>
+          <a href="enroll.html?plan=family" class="btn btn-primary" style="justify-content:center;" data-i18n="plans.cta">Enroll Now</a>
+        </div>
+      </div>
+      <p class="plans-note" data-i18n="plans.note">Full health insurance plans — ER visits, hospitalization, specialist coverage, and pharmacy benefits — are launching soon. Members are notified first.</p>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="why.eyebrow">Why Choose Sante Lakay</div>
+        <h2 data-i18n="why.title">A safety net your family in Haiti can count on.</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4Z"/></svg>
+          <h3 data-i18n="why.c1.title">A dispatch center on the ground</h3>
+          <p data-i18n="why.c1.body">Based in Port-au-Prince and staffed 24/7, so calls are answered day and night.</p>
+        </div>
+        <div class="why-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <h3 data-i18n="why.c2.title">A network built for rural Haiti</h3>
+          <p data-i18n="why.c2.body">Our Guardian Network places medical professionals in areas without full-time coverage.</p>
+        </div>
+        <div class="why-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 2v4"/></svg>
+          <h3 data-i18n="why.c3.title">Manage everything from abroad</h3>
+          <p data-i18n="why.c3.body">Enroll, pay, and update your family's coverage from wherever you live.</p>
+        </div>
+        <div class="why-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.5-9.2C.7 8.1 2.4 4.5 6 4.1c2-.2 3.6.8 4.9 2.3.4.5 1 .5 1.4 0C13.6 4.9 15.2 3.9 17.2 4.1c3.6.4 5.3 4 3.5 7.7C18.1 16.4 12 21 12 21Z"/></svg>
+          <h3 data-i18n="why.c4.title">Built with the diaspora, for the diaspora</h3>
+          <p data-i18n="why.c4.body">Designed around how Haitian families actually support one another across borders.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section-tint">
+    <div class="wrap">
+      <div class="section-head center">
+        <div class="eyebrow" style="justify-content:center;" data-i18n="faq.eyebrow">Frequently Asked</div>
+        <h2 data-i18n="faq.title">Questions, answered.</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q"><span data-i18n="faq.q1">Who can I enroll in a Sante Lakay membership?</span><span class="plus">+</span></summary>
+          <p class="faq-a" data-i18n="faq.a1">Any family member living in Haiti — parents, grandparents, siblings, children, or extended family you support. A Family plan covers up to four people, with room to add more.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q"><span data-i18n="faq.q2">How does my family in Haiti request help?</span><span class="plus">+</span></summary>
+          <p class="faq-a" data-i18n="faq.a2">They call one dispatch number, available 24/7. Our team verifies membership status and coordinates the appropriate response — ground ambulance, air evacuation, or hospital transfer.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q"><span data-i18n="faq.q3">Where can I enroll from?</span><span class="plus">+</span></summary>
+          <p class="faq-a" data-i18n="faq.a3">Anywhere. Sante Lakay is built for the Haitian diaspora worldwide — the United States, Canada, France, the Dominican Republic, and beyond.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q"><span data-i18n="faq.q4">Does this include full health insurance?</span><span class="plus">+</span></summary>
+          <p class="faq-a" data-i18n="faq.a4">Not yet. Today's memberships cover emergency coordination, ambulance, and evacuation services. Comprehensive health insurance plans — covering ER visits, hospitalization, and pharmacy — are launching soon.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q"><span data-i18n="faq.q5">Can I cancel or change my plan?</span><span class="plus">+</span></summary>
+          <p class="faq-a" data-i18n="faq.a5">Yes. You can manage your membership, update payment details, and adjust who's covered directly from your account once your member portal is active.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact" class="cta-banner">
+    <div class="wrap">
+      <h2 data-i18n="cta.title">Enroll your family today. Rest easy tonight.</h2>
+      <p data-i18n="cta.body">It takes minutes to sign up. It gives your family in Haiti a lifeline that lasts.</p>
+      <div class="btn-row">
+        <a href="enroll.html" class="btn btn-accent" data-i18n="cta.button">Enroll Now</a>
+        <a href="mailto:hello@santelakayhaiti.com" class="btn btn-ghost" style="border-color:rgba(255,255,255,.3); color:#fff;" data-i18n="cta.contact">Talk to Us</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <svg class="logo-mark" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="15" cy="15" r="14" stroke="#14477A" stroke-width="1.6"/>
+            <path d="M9 15.5C9 15.5 11.5 12 15 12C18.5 12 21 15.5 21 15.5" stroke="#E2A33B" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="9" cy="15.5" r="1.6" fill="#14477A"/>
+            <circle cx="21" cy="15.5" r="1.6" fill="#14477A"/>
+          </svg>
+          Sante Lakay
+        </div>
+        <p data-i18n="footer.tagline">Home health for the Haitian diaspora. Wherever you live, your family in Haiti is never alone.</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.col1.title">Company</h4>
+        <a href="#about" data-i18n="footer.col1.l1">About Sante Lakay</a>
+        <a href="how-it-works.html" data-i18n="footer.col1.l2">How It Works</a>
+        <a href="plans.html" data-i18n="footer.col1.l3">Membership Plans</a>
+        <a href="#faq" data-i18n="footer.col1.l4">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.col2.title">Services</h4>
+        <a href="#" data-i18n="footer.col2.l1">Emergency Medical Services</a>
+        <a href="#" data-i18n="footer.col2.l2">Medical Evacuations</a>
+        <a href="#" data-i18n="footer.col2.l3">Patient Advocacy</a>
+        <a href="enroll.html" data-i18n="footer.col2.l4">Member Login</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.col3.title">Contact</h4>
+        <a href="mailto:hello@santelakayhaiti.com">hello@santelakayhaiti.com</a>
+        <a href="#" data-i18n="footer.col3.l1">South Florida, USA</a>
+        <a href="#" data-i18n="footer.col3.l2">Port-au-Prince, Haiti</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer.copy">© 2026 Sante Lakay. All rights reserved.</span>
+      <span style="font-family:var(--mono); font-size:11.5px; color:var(--muted);">Homepage design v1 — EN</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const translations = {
+  en: {
+    "nav.about":"About","nav.how":"How It Works","nav.plans":"Plans","nav.faq":"FAQ","nav.contact":"Contact","nav.enroll":"Enroll Now",
+    "hero.eyebrow":"Medical Membership for the Haitian Diaspora",
+    "hero.title":"Your family in Haiti is never <em>alone.</em>",
+    "hero.lead":"A monthly membership from anywhere in the world that gives your loved ones in Haiti immediate access to 24/7 emergency medical coordination, ambulance dispatch, and medical evacuation — the moment they need it.",
+    "hero.cta1":"See Membership Plans","hero.cta2":"How It Works",
+    "hero.stat1":"Emergency medical coordination","hero.stat2":"Ambulance & evacuation network","hero.stat3":"Support in your language",
+    "hero.card.tag":"Live connection","hero.card.title":"One membership. One lifeline.",
+    "hero.card.body":"Wherever you live — Miami, Montréal, Paris, Santo Domingo — your enrollment keeps a direct line open to emergency care for the people you love.",
+    "about.eyebrow":"What Is Sante Lakay","about.title":"Peace of mind, delivered across the water.",
+    "about.body":"Sante Lakay (\"Home Health\") is a medical membership built for Haitians living abroad. You enroll and pay from wherever you are — the United States, Canada, France, the Dominican Republic, anywhere. Your family in Haiti gets a direct line to emergency medical support whenever they need it, backed by a dispatch center and a network of ambulance, air, and ground rescue partners on the ground in Haiti.",
+    "about.point1.title":"Built on family, not just coverage","about.point1.body":"Haitian culture is collectivist — caring for family abroad is an honor, not an obligation. Sante Lakay gives that instinct a reliable system.",
+    "about.point2.title":"Ready from day one","about.point2.body":"No waiting rooms, no bureaucracy to navigate from abroad. Enrollment takes minutes and coverage activates immediately.",
+    "about.point3.title":"A trusted local network","about.point3.body":"Our dispatch center and rescue partners are based in Port-au-Prince, with a growing Guardian Network of medical professionals in rural regions.",
+    "how.eyebrow":"How It Works","how.title":"Three steps, from anywhere in the world.",
+    "how.step1.title":"Choose a plan","how.step1.body":"Pick an Individual or Group membership based on how many family members in Haiti you want covered.",
+    "how.step2.title":"Add your family","how.step2.body":"Enter their names and phone numbers in Haiti. They'll receive a message in Kreyòl explaining their new coverage and who to call.",
+    "how.step3.title":"We're on call, 24/7","how.step3.body":"Your membership renews automatically. If a medical emergency happens, your family calls one number — day or night.",
+    "included.eyebrow":"What's Included","included.title":"Every membership includes.",
+    "included.s1.title":"24/7 Emergency Coordination","included.s1.body":"A dispatch center standing by around the clock, every day of the year.",
+    "included.s2.title":"Ground Ambulance Service","included.s2.body":"Rapid ground transport to the nearest appropriate facility.",
+    "included.s3.title":"Air & Fixed-Wing Evacuation","included.s3.body":"Helicopter and airplane evacuation for cases requiring a higher level of care.",
+    "included.s4.title":"Transfers to Higher Care","included.s4.body":"Coordinated transfer between facilities when specialist care is needed.",
+    "included.s5.title":"Patient Advocacy","included.s5.body":"Someone in your family's corner, coordinating care and communicating with hospitals.",
+    "included.s6.title":"Hospital & Specialist Access","included.s6.body":"Coordination with hospitals and specialists across our care network.",
+    "included.s7.title":"Rapid Response","included.s7.body":"A dispatch process built for speed when every minute counts.",
+    "included.s8.title":"Emergency Medical Assistance","included.s8.body":"Guidance and support for your family from the very first call.",
+    "plans.eyebrow":"Membership Plans","plans.title":"Simple pricing. Real protection.",
+    "plans.individual.name":"Individual","plans.individual.per":"/ month","plans.individual.people":"Covers 1 family member in Haiti",
+    "plans.individual.f1":"24/7 medical support","plans.individual.f2":"Ambulance & rescue coverage","plans.individual.f3":"1 in-country evacuation flight","plans.individual.f4":"2 ground ambulance transports","plans.individual.f5":"Patient advocacy",
+    "plans.family.badge":"Most Popular","plans.family.name":"Family / Group","plans.family.per":"/ month","plans.family.people":"Covers up to 4 family members in Haiti",
+    "plans.family.f1":"24/7 medical support","plans.family.f2":"Ambulance & rescue coverage","plans.family.f3":"2 in-country evacuation flights","plans.family.f4":"4 ground ambulance transports","plans.family.f5":"Patient advocacy","plans.family.f6":"Add up to 2 more members, $5/mo each",
+    "plans.cta":"Enroll Now","plans.note":"Full health insurance plans — ER visits, hospitalization, specialist coverage, and pharmacy benefits — are launching soon. Members are notified first.",
+    "why.eyebrow":"Why Choose Sante Lakay","why.title":"A safety net your family in Haiti can count on.",
+    "why.c1.title":"A dispatch center on the ground","why.c1.body":"Based in Port-au-Prince and staffed 24/7, so calls are answered day and night.",
+    "why.c2.title":"A network built for rural Haiti","why.c2.body":"Our Guardian Network places medical professionals in areas without full-time coverage.",
+    "why.c3.title":"Manage everything from abroad","why.c3.body":"Enroll, pay, and update your family's coverage from wherever you live.",
+    "why.c4.title":"Built with the diaspora, for the diaspora","why.c4.body":"Designed around how Haitian families actually support one another across borders.",
+    "faq.eyebrow":"Frequently Asked","faq.title":"Questions, answered.",
+    "faq.q1":"Who can I enroll in a Sante Lakay membership?","faq.a1":"Any family member living in Haiti — parents, grandparents, siblings, children, or extended family you support. A Family plan covers up to four people, with room to add more.",
+    "faq.q2":"How does my family in Haiti request help?","faq.a2":"They call one dispatch number, available 24/7. Our team verifies membership status and coordinates the appropriate response — ground ambulance, air evacuation, or hospital transfer.",
+    "faq.q3":"Where can I enroll from?","faq.a3":"Anywhere. Sante Lakay is built for the Haitian diaspora worldwide — the United States, Canada, France, the Dominican Republic, and beyond.",
+    "faq.q4":"Does this include full health insurance?","faq.a4":"Not yet. Today's memberships cover emergency coordination, ambulance, and evacuation services. Comprehensive health insurance plans — covering ER visits, hospitalization, and pharmacy — are launching soon.",
+    "faq.q5":"Can I cancel or change my plan?","faq.a5":"Yes. You can manage your membership, update payment details, and adjust who's covered directly from your account once your member portal is active.",
+    "cta.title":"Enroll your family today. Rest easy tonight.","cta.body":"It takes minutes to sign up. It gives your family in Haiti a lifeline that lasts.",
+    "cta.button":"Enroll Now","cta.contact":"Talk to Us",
+    "footer.tagline":"Home health for the Haitian diaspora. Wherever you live, your family in Haiti is never alone.",
+    "footer.col1.title":"Company","footer.col1.l1":"About Sante Lakay","footer.col1.l2":"How It Works","footer.col1.l3":"Membership Plans","footer.col1.l4":"FAQ",
+    "footer.col2.title":"Services","footer.col2.l1":"Emergency Medical Services","footer.col2.l2":"Medical Evacuations","footer.col2.l3":"Patient Advocacy","footer.col2.l4":"Member Login",
+    "footer.col3.title":"Contact","footer.col3.l1":"South Florida, USA","footer.col3.l2":"Port-au-Prince, Haiti",
+    "footer.copy":"© 2026 Sante Lakay. All rights reserved."
+  },
+  ht: {
+    "nav.about":"Konsènan Nou","nav.how":"Kijan Sa Mache","nav.plans":"Plan Yo","nav.faq":"Kesyon Moun Poze","nav.contact":"Kontakte Nou","nav.enroll":"Enskri Kounye a",
+    "hero.eyebrow":"Manbrezip Medikal pou Dyaspora Ayisyen an",
+    "hero.title":"Fanmi ou an Ayiti pa janm <em>pou kont li.</em>",
+    "hero.lead":"Yon manbrezip chak mwa, kèlkeswa kote ou ye nan mond lan, ki bay fanmi ou an Ayiti aksè imedya a yon koòdinasyon medikal ijans 24/7, dispatch anbilans, ak evakyasyon medikal — nan moman yo bezwen l.",
+    "hero.cta1":"Gade Plan Manbrezip Yo","hero.cta2":"Kijan Sa Mache",
+    "hero.stat1":"Koòdinasyon medikal ijans","hero.stat2":"Rezo anbilans ak evakyasyon","hero.stat3":"Sipò nan lang ou pale a",
+    "hero.card.tag":"Koneksyon an dirèk",
+    "hero.card.title":"Yon sèl manbrezip. Yon sèl liy lavi.",
+    "hero.card.body":"Kèlkeswa kote ou rete — Miami, Monreyal, Pari, Santo Domingo — enskripsyon ou kenbe yon liy dirèk louvri pou swen ijans pou moun ou renmen yo.",
+    "about.eyebrow":"Kisa Sante Lakay Ye","about.title":"Lespri poze, jouk lòt bò dlo a.",
+    "about.body":"Sante Lakay se yon manbrezip medikal ki fèt pou Ayisyen k ap viv aletranje. Ou enskri epi peye kèlkeswa kote ou ye — Etazini, Kanada, Frans, Repiblik Dominikèn, nenpòt kote. Fanmi ou an Ayiti jwenn yon liy dirèk pou sipò medikal ijans nenpòt lè yo bezwen l, avèk sipò yon sant dispatch ak yon rezo patnè anbilans, avyon ak sekou tè an Ayiti.",
+    "about.point1.title":"Bati sou fanmi, pa sèlman kouvèti","about.point1.body":"Kilti Ayisyen an se yon kilti kolektivis — pran swen fanmi lòt bò dlo a se yon lonè, se pa yon obligasyon. Sante Lakay bay enstenk sa a yon sistèm serye.",
+    "about.point2.title":"Pare depi premye jou a","about.point2.body":"Pa gen sal datant, pa gen tèt chaje pou navige soti aletranje. Enskripsyon pran kèk minit epi kouvèti a aktive imedyatman.",
+    "about.point3.title":"Yon rezo lokal ki gen konfyans","about.point3.body":"Sant dispatch nou an ak patnè sekou nou yo baze Pòtoprens, avèk yon Rezo Gadyen k ap grandi ki gen pwofesyonèl medikal nan zòn riral yo.",
+    "how.eyebrow":"Kijan Sa Mache","how.title":"Twa etap, kèlkeswa kote ou ye nan mond lan.",
+    "how.step1.title":"Chwazi yon plan","how.step1.body":"Chwazi yon manbrezip Endividyèl oswa Gwoup selon konbyen manm fanmi an Ayiti ou vle kouvri.",
+    "how.step2.title":"Ajoute fanmi ou","how.step2.body":"Antre non yo ak nimewo telefòn yo an Ayiti. Yo pral resevwa yon mesaj an Kreyòl ki eksplike nouvo kouvèti yo ak ki moun pou yo rele.",
+    "how.step3.title":"Nou disponib 24/7","how.step3.body":"Manbrezip ou renouvle otomatikman. Si gen yon ijans medikal, fanmi ou rele yon sèl nimewo — lajounen kou lannwit.",
+    "included.eyebrow":"Sa Ki Enkli","included.title":"Chak manbrezip enkli.",
+    "included.s1.title":"Koòdinasyon Ijans 24/7","included.s1.body":"Yon sant dispatch ki disponib tout tan, chak jou nan ane a.",
+    "included.s2.title":"Sèvis Anbilans Tè","included.s2.body":"Transpò rapid sou tè jouk nan enstalasyon apwopriye ki pi pre a.",
+    "included.s3.title":"Evakyasyon Avyon","included.s3.body":"Evakyasyon elikoptè ak avyon pou ka ki bezwen yon nivo swen ki pi wo.",
+    "included.s4.title":"Transfè Pou Swen ki Pi Wo","included.s4.body":"Transfè kowòdone ant enstalasyon lè swen espesyalis nesesè.",
+    "included.s5.title":"Defans Pasyan","included.s5.body":"Yon moun ki nan kwen fanmi ou, k ap kowòdone swen ak kominike ak lopital yo.",
+    "included.s6.title":"Aksè Lopital & Espesyalis","included.s6.body":"Kowòdinasyon ak lopital ak espesyalis nan rezo swen nou an.",
+    "included.s7.title":"Repons Rapid","included.s7.body":"Yon pwosesis dispatch ki fèt pou vitès lè chak minit konte.",
+    "included.s8.title":"Asistans Medikal Ijans","included.s8.body":"Gid ak sipò pou fanmi ou depi premye apèl la.",
+    "plans.eyebrow":"Plan Manbrezip","plans.title":"Pri senp. Vrè pwoteksyon.",
+    "plans.individual.name":"Endividyèl","plans.individual.per":"/ chak mwa","plans.individual.people":"Kouvri 1 manm fanmi an Ayiti",
+    "plans.individual.f1":"Sipò medikal 24/7","plans.individual.f2":"Kouvèti anbilans ak sekou","plans.individual.f3":"1 vòl evakyasyon nan peyi a","plans.individual.f4":"2 transpò anbilans tè","plans.individual.f5":"Defans pasyan",
+    "plans.family.badge":"Pi Popilè","plans.family.name":"Fanmi / Gwoup","plans.family.per":"/ chak mwa","plans.family.people":"Kouvri jiska 4 manm fanmi an Ayiti",
+    "plans.family.f1":"Sipò medikal 24/7","plans.family.f2":"Kouvèti anbilans ak sekou","plans.family.f3":"2 vòl evakyasyon nan peyi a","plans.family.f4":"4 transpò anbilans tè","plans.family.f5":"Defans pasyan","plans.family.f6":"Ajoute jiska 2 moun anplis, $5/mwa chak",
+    "plans.cta":"Enskri Kounye a","plans.note":"Plan asirans sante konplè — vizit ijans, ospitalizasyon, kouvèti espesyalis, ak avantaj famasi — ap vini talè. Manm yo ap enfòme an premye.",
+    "why.eyebrow":"Poukisa Chwazi Sante Lakay","why.title":"Yon filè sekirite fanmi ou an Ayiti ka konte sou li.",
+    "why.c1.title":"Yon sant dispatch sou plas","why.c1.body":"Baze Pòtoprens epi disponib 24/7, pou apèl yo reponn lajounen kou lannwit.",
+    "why.c2.title":"Yon rezo bati pou Ayiti riral","why.c2.body":"Rezo Gadyen nou an mete pwofesyonèl medikal nan zòn ki pa gen kouvèti tan plen.",
+    "why.c3.title":"Jere tout bagay soti aletranje","why.c3.body":"Enskri, peye, epi mete ajou kouvèti fanmi ou kèlkeswa kote ou ye.",
+    "why.c4.title":"Bati ak dyaspora a, pou dyaspora a","why.c4.body":"Fèt selon fason fanmi Ayisyen yo vrèman sipòte youn lòt atravè fwontyè.",
+    "faq.eyebrow":"Kesyon Moun Poze","faq.title":"Repons pou kesyon yo.",
+    "faq.q1":"Ki moun mwen ka enskri nan yon manbrezip Sante Lakay?","faq.a1":"Nenpòt manm fanmi k ap viv an Ayiti — paran, gran paran, frè/sè, timoun, oswa fanmi elaji ou sipòte. Yon plan Fanmi kouvri jiska kat moun, avèk plas pou ajoute plis.",
+    "faq.q2":"Kijan fanmi mwen an Ayiti fè demann èd?","faq.a2":"Yo rele yon sèl nimewo dispatch, ki disponib 24/7. Ekip nou an verifye estati manbrezip la epi kowòdone repons ki apwopriye a — anbilans tè, evakyasyon avyon, oswa transfè lopital.",
+    "faq.q3":"Ki kote mwen ka enskri?","faq.a3":"Nenpòt kote. Sante Lakay fèt pou dyaspora Ayisyen an atravè lemond — Etazini, Kanada, Frans, Repiblik Dominikèn, ak plis toujou.",
+    "faq.q4":"Èske sa gen ladan asirans sante konplè?","faq.a4":"Poko. Manbrezip jodi a kouvri koòdinasyon ijans, anbilans, ak sèvis evakyasyon. Plan asirans sante konplè — ki kouvri vizit ijans, ospitalizasyon, ak famasi — ap vini talè.",
+    "faq.q5":"Èske mwen ka anile oswa chanje plan mwen?","faq.a5":"Wi. Ou ka jere manbrezip ou, mete ajou enfòmasyon peman, epi ajiste ki moun ki kouvri dirèkteman soti nan kont ou lè pòtay manm nan aktive.",
+    "cta.title":"Enskri fanmi ou jodi a. Repoze pi trankil aswè a.","cta.body":"Li pran sèlman kèk minit pou enskri. Li bay fanmi ou an Ayiti yon liy lavi ki dire.",
+    "cta.button":"Enskri Kounye a","cta.contact":"Pale ak Nou",
+    "footer.tagline":"Sante lakay pou dyaspora Ayisyen an. Kèlkeswa kote ou ye, fanmi ou an Ayiti pa janm pou kont li.",
+    "footer.col1.title":"Konpayi","footer.col1.l1":"Konsènan Sante Lakay","footer.col1.l2":"Kijan Sa Mache","footer.col1.l3":"Plan Manbrezip","footer.col1.l4":"Kesyon Moun Poze",
+    "footer.col2.title":"Sèvis","footer.col2.l1":"Sèvis Medikal Ijans","footer.col2.l2":"Evakyasyon Medikal","footer.col2.l3":"Defans Pasyan","footer.col2.l4":"Koneksyon Manm",
+    "footer.col3.title":"Kontak","footer.col3.l1":"South Florida, Etazini","footer.col3.l2":"Pòtoprens, Ayiti",
+    "footer.copy":"© 2026 Sante Lakay. Tout dwa rezève."
+  },
+  fr: {
+    "nav.about":"À Propos","nav.how":"Comment Ça Marche","nav.plans":"Nos Forfaits","nav.faq":"FAQ","nav.contact":"Contact","nav.enroll":"S'inscrire",
+    "hero.eyebrow":"Adhésion Médicale pour la Diaspora Haïtienne",
+    "hero.title":"Votre famille en Haïti n'est jamais <em>seule.</em>",
+    "hero.lead":"Une adhésion mensuelle, où que vous soyez dans le monde, qui donne à vos proches en Haïti un accès immédiat à une coordination médicale d'urgence 24h/24, à une ambulance et à une évacuation médicale — dès qu'ils en ont besoin.",
+    "hero.cta1":"Voir les Forfaits","hero.cta2":"Comment Ça Marche",
+    "hero.stat1":"Coordination médicale d'urgence","hero.stat2":"Réseau d'ambulances et d'évacuation","hero.stat3":"Assistance dans votre langue",
+    "hero.card.tag":"Connexion en direct","hero.card.title":"Une adhésion. Un lien de vie.",
+    "hero.card.body":"Où que vous viviez — Miami, Montréal, Paris, Saint-Domingue — votre adhésion maintient une ligne directe ouverte vers des soins d'urgence pour les personnes que vous aimez.",
+    "about.eyebrow":"Qu'est-ce que Sante Lakay","about.title":"La tranquillité d'esprit, livrée au-delà de l'eau.",
+    "about.body":"Sante Lakay (« Santé à la Maison ») est une adhésion médicale conçue pour les Haïtiens vivant à l'étranger. Vous vous inscrivez et payez d'où que vous soyez — États-Unis, Canada, France, République Dominicaine, n'importe où. Votre famille en Haïti obtient une ligne directe vers un soutien médical d'urgence dès qu'elle en a besoin, appuyée par un centre de répartition et un réseau de partenaires d'ambulance, aériens et terrestres en Haïti.",
+    "about.point1.title":"Fondé sur la famille, pas seulement la couverture","about.point1.body":"La culture haïtienne est collectiviste — prendre soin de sa famille depuis l'étranger est un honneur, pas une obligation. Sante Lakay donne à cet instinct un système fiable.",
+    "about.point2.title":"Prêt dès le premier jour","about.point2.body":"Pas de salle d'attente, pas de bureaucratie à gérer depuis l'étranger. L'inscription prend quelques minutes et la couverture s'active immédiatement.",
+    "about.point3.title":"Un réseau local de confiance","about.point3.body":"Notre centre de répartition et nos partenaires de secours sont basés à Port-au-Prince, avec un Réseau des Gardiens grandissant de professionnels de santé dans les régions rurales.",
+    "how.eyebrow":"Comment Ça Marche","how.title":"Trois étapes, où que vous soyez dans le monde.",
+    "how.step1.title":"Choisissez un forfait","how.step1.body":"Choisissez une adhésion Individuelle ou Groupe selon le nombre de membres de la famille en Haïti que vous souhaitez couvrir.",
+    "how.step2.title":"Ajoutez votre famille","how.step2.body":"Entrez leurs noms et numéros de téléphone en Haïti. Ils recevront un message en Créole expliquant leur nouvelle couverture et qui appeler.",
+    "how.step3.title":"Nous sommes disponibles 24h/24","how.step3.body":"Votre adhésion se renouvelle automatiquement. En cas d'urgence médicale, votre famille appelle un seul numéro — jour et nuit.",
+    "included.eyebrow":"Ce Qui Est Inclus","included.title":"Chaque adhésion inclut.",
+    "included.s1.title":"Coordination d'Urgence 24h/24","included.s1.body":"Un centre de répartition disponible en permanence, tous les jours de l'année.",
+    "included.s2.title":"Service d'Ambulance Terrestre","included.s2.body":"Transport terrestre rapide vers l'établissement approprié le plus proche.",
+    "included.s3.title":"Évacuation Aérienne","included.s3.body":"Évacuation par hélicoptère et avion pour les cas nécessitant un niveau de soins supérieur.",
+    "included.s4.title":"Transferts vers des Soins Supérieurs","included.s4.body":"Transfert coordonné entre établissements lorsqu'un soin spécialisé est nécessaire.",
+    "included.s5.title":"Défense du Patient","included.s5.body":"Quelqu'un dans le coin de votre famille, coordonnant les soins et communiquant avec les hôpitaux.",
+    "included.s6.title":"Accès Hôpitaux & Spécialistes","included.s6.body":"Coordination avec les hôpitaux et spécialistes de notre réseau de soins.",
+    "included.s7.title":"Réponse Rapide","included.s7.body":"Un processus de répartition conçu pour la rapidité quand chaque minute compte.",
+    "included.s8.title":"Assistance Médicale d'Urgence","included.s8.body":"Conseils et soutien pour votre famille dès le premier appel.",
+    "plans.eyebrow":"Nos Forfaits","plans.title":"Des prix simples. Une vraie protection.",
+    "plans.individual.name":"Individuel","plans.individual.per":"/ mois","plans.individual.people":"Couvre 1 membre de la famille en Haïti",
+    "plans.individual.f1":"Soutien médical 24h/24","plans.individual.f2":"Couverture ambulance et secours","plans.individual.f3":"1 vol d'évacuation dans le pays","plans.individual.f4":"2 transports en ambulance terrestre","plans.individual.f5":"Défense du patient",
+    "plans.family.badge":"Le Plus Populaire","plans.family.name":"Famille / Groupe","plans.family.per":"/ mois","plans.family.people":"Couvre jusqu'à 4 membres de la famille en Haïti",
+    "plans.family.f1":"Soutien médical 24h/24","plans.family.f2":"Couverture ambulance et secours","plans.family.f3":"2 vols d'évacuation dans le pays","plans.family.f4":"4 transports en ambulance terrestre","plans.family.f5":"Défense du patient","plans.family.f6":"Ajoutez jusqu'à 2 personnes de plus, 5 $/mois chacune",
+    "plans.cta":"S'inscrire","plans.note":"Des forfaits d'assurance santé complets — urgences, hospitalisation, spécialistes et pharmacie — arrivent bientôt. Les membres seront informés en premier.",
+    "why.eyebrow":"Pourquoi Choisir Sante Lakay","why.title":"Un filet de sécurité sur lequel votre famille en Haïti peut compter.",
+    "why.c1.title":"Un centre de répartition sur le terrain","why.c1.body":"Basé à Port-au-Prince et disponible 24h/24, pour que les appels soient pris jour et nuit.",
+    "why.c2.title":"Un réseau conçu pour l'Haïti rurale","why.c2.body":"Notre Réseau des Gardiens place des professionnels de santé dans les zones sans couverture à temps plein.",
+    "why.c3.title":"Gérez tout depuis l'étranger","why.c3.body":"Inscrivez-vous, payez et mettez à jour la couverture de votre famille où que vous viviez.",
+    "why.c4.title":"Conçu avec la diaspora, pour la diaspora","why.c4.body":"Pensé selon la manière dont les familles haïtiennes se soutiennent réellement au-delà des frontières.",
+    "faq.eyebrow":"Questions Fréquentes","faq.title":"Vos questions, nos réponses.",
+    "faq.q1":"Qui puis-je inscrire à une adhésion Sante Lakay?","faq.a1":"Tout membre de la famille vivant en Haïti — parents, grands-parents, frères et sœurs, enfants, ou famille élargie que vous soutenez. Un forfait Famille couvre jusqu'à quatre personnes, avec la possibilité d'en ajouter.",
+    "faq.q2":"Comment ma famille en Haïti demande-t-elle de l'aide?","faq.a2":"Elle appelle un seul numéro de répartition, disponible 24h/24. Notre équipe vérifie le statut de l'adhésion et coordonne la réponse appropriée — ambulance terrestre, évacuation aérienne, ou transfert hospitalier.",
+    "faq.q3":"D'où puis-je m'inscrire?","faq.a3":"De n'importe où. Sante Lakay est conçu pour la diaspora haïtienne dans le monde entier — États-Unis, Canada, France, République Dominicaine, et au-delà.",
+    "faq.q4":"Cela inclut-il une assurance santé complète?","faq.a4":"Pas encore. Les adhésions actuelles couvrent la coordination d'urgence, l'ambulance et les services d'évacuation. Des forfaits d'assurance santé complets — couvrant les urgences, l'hospitalisation et la pharmacie — arrivent bientôt.",
+    "faq.q5":"Puis-je annuler ou changer mon forfait?","faq.a5":"Oui. Vous pouvez gérer votre adhésion, mettre à jour vos informations de paiement et ajuster qui est couvert directement depuis votre compte une fois le portail membre actif.",
+    "cta.title":"Inscrivez votre famille aujourd'hui. Dormez tranquille ce soir.","cta.body":"L'inscription prend quelques minutes. Elle donne à votre famille en Haïti un lien de vie durable.",
+    "cta.button":"S'inscrire","cta.contact":"Nous Contacter",
+    "footer.tagline":"La santé à la maison pour la diaspora haïtienne. Où que vous viviez, votre famille en Haïti n'est jamais seule.",
+    "footer.col1.title":"Entreprise","footer.col1.l1":"À Propos de Sante Lakay","footer.col1.l2":"Comment Ça Marche","footer.col1.l3":"Nos Forfaits","footer.col1.l4":"FAQ",
+    "footer.col2.title":"Services","footer.col2.l1":"Services Médicaux d'Urgence","footer.col2.l2":"Évacuations Médicales","footer.col2.l3":"Défense du Patient","footer.col2.l4":"Connexion Membre",
+    "footer.col3.title":"Contact","footer.col3.l1":"South Florida, États-Unis","footer.col3.l2":"Port-au-Prince, Haïti",
+    "footer.copy":"© 2026 Sante Lakay. Tous droits réservés."
+  },
+  es: {
+    "nav.about":"Nosotros","nav.how":"Cómo Funciona","nav.plans":"Planes","nav.faq":"Preguntas","nav.contact":"Contacto","nav.enroll":"Inscríbete Ahora",
+    "hero.eyebrow":"Membresía Médica para la Diáspora Haitiana",
+    "hero.title":"Tu familia en Haití nunca está <em>sola.</em>",
+    "hero.lead":"Una membresía mensual, desde cualquier parte del mundo, que le da a tus seres queridos en Haití acceso inmediato a coordinación médica de emergencia 24/7, despacho de ambulancias y evacuación médica — en el momento en que la necesiten.",
+    "hero.cta1":"Ver Planes de Membresía","hero.cta2":"Cómo Funciona",
+    "hero.stat1":"Coordinación médica de emergencia","hero.stat2":"Red de ambulancias y evacuación","hero.stat3":"Atención en tu idioma",
+    "hero.card.tag":"Conexión en vivo","hero.card.title":"Una membresía. Una línea de vida.",
+    "hero.card.body":"Dondequiera que vivas — Miami, Montreal, París, Santo Domingo — tu inscripción mantiene una línea directa abierta hacia atención de emergencia para las personas que amas.",
+    "about.eyebrow":"Qué Es Sante Lakay","about.title":"Tranquilidad, entregada al otro lado del mar.",
+    "about.body":"Sante Lakay (\"Salud en Casa\") es una membresía médica creada para haitianos que viven en el extranjero. Te inscribes y pagas desde donde estés — Estados Unidos, Canadá, Francia, República Dominicana, cualquier lugar. Tu familia en Haití obtiene una línea directa a soporte médico de emergencia cuando lo necesite, respaldada por un centro de despacho y una red de socios de ambulancia, aéreos y terrestres en Haití.",
+    "about.point1.title":"Construido sobre la familia, no solo cobertura","about.point1.body":"La cultura haitiana es colectivista — cuidar a la familia desde el extranjero es un honor, no una obligación. Sante Lakay le da a ese instinto un sistema confiable.",
+    "about.point2.title":"Listo desde el primer día","about.point2.body":"Sin salas de espera, sin burocracia que navegar desde el extranjero. La inscripción toma minutos y la cobertura se activa de inmediato.",
+    "about.point3.title":"Una red local de confianza","about.point3.body":"Nuestro centro de despacho y socios de rescate están en Puerto Príncipe, con una creciente Red de Guardianes de profesionales médicos en zonas rurales.",
+    "how.eyebrow":"Cómo Funciona","how.title":"Tres pasos, desde cualquier parte del mundo.",
+    "how.step1.title":"Elige un plan","how.step1.body":"Elige una membresía Individual o de Grupo según cuántos familiares en Haití quieras cubrir.",
+    "how.step2.title":"Agrega a tu familia","how.step2.body":"Ingresa sus nombres y números de teléfono en Haití. Recibirán un mensaje en criollo haitiano explicando su nueva cobertura y a quién llamar.",
+    "how.step3.title":"Disponibles 24/7","how.step3.body":"Tu membresía se renueva automáticamente. Si ocurre una emergencia médica, tu familia llama a un solo número — de día o de noche.",
+    "included.eyebrow":"Qué Incluye","included.title":"Cada membresía incluye.",
+    "included.s1.title":"Coordinación de Emergencia 24/7","included.s1.body":"Un centro de despacho disponible las 24 horas, todos los días del año.",
+    "included.s2.title":"Servicio de Ambulancia Terrestre","included.s2.body":"Transporte terrestre rápido hacia la instalación adecuada más cercana.",
+    "included.s3.title":"Evacuación Aérea","included.s3.body":"Evacuación en helicóptero y avión para casos que requieren un nivel de atención superior.",
+    "included.s4.title":"Traslados a Atención Superior","included.s4.body":"Traslado coordinado entre instalaciones cuando se necesita atención especializada.",
+    "included.s5.title":"Defensoría del Paciente","included.s5.body":"Alguien de tu lado, coordinando la atención y comunicándose con los hospitales.",
+    "included.s6.title":"Acceso a Hospitales y Especialistas","included.s6.body":"Coordinación con hospitales y especialistas dentro de nuestra red de atención.",
+    "included.s7.title":"Respuesta Rápida","included.s7.body":"Un proceso de despacho diseñado para la velocidad cuando cada minuto cuenta.",
+    "included.s8.title":"Asistencia Médica de Emergencia","included.s8.body":"Orientación y apoyo para tu familia desde la primera llamada.",
+    "plans.eyebrow":"Planes de Membresía","plans.title":"Precios simples. Protección real.",
+    "plans.individual.name":"Individual","plans.individual.per":"/ mes","plans.individual.people":"Cubre a 1 familiar en Haití",
+    "plans.individual.f1":"Soporte médico 24/7","plans.individual.f2":"Cobertura de ambulancia y rescate","plans.individual.f3":"1 vuelo de evacuación dentro del país","plans.individual.f4":"2 traslados en ambulancia terrestre","plans.individual.f5":"Defensoría del paciente",
+    "plans.family.badge":"Más Popular","plans.family.name":"Familiar / Grupo","plans.family.per":"/ mes","plans.family.people":"Cubre hasta 4 familiares en Haití",
+    "plans.family.f1":"Soporte médico 24/7","plans.family.f2":"Cobertura de ambulancia y rescate","plans.family.f3":"2 vuelos de evacuación dentro del país","plans.family.f4":"4 traslados en ambulancia terrestre","plans.family.f5":"Defensoría del paciente","plans.family.f6":"Agrega hasta 2 personas más, $5/mes cada una",
+    "plans.cta":"Inscríbete Ahora","plans.note":"Los planes de seguro médico completo — urgencias, hospitalización, especialistas y farmacia — llegarán pronto. Los miembros serán los primeros en enterarse.",
+    "why.eyebrow":"Por Qué Elegir Sante Lakay","why.title":"Una red de seguridad con la que tu familia en Haití puede contar.",
+    "why.c1.title":"Un centro de despacho en el terreno","why.c1.body":"Con base en Puerto Príncipe y disponible 24/7, para que las llamadas se respondan de día y de noche.",
+    "why.c2.title":"Una red pensada para el Haití rural","why.c2.body":"Nuestra Red de Guardianes coloca profesionales médicos en zonas sin cobertura de tiempo completo.",
+    "why.c3.title":"Gestiona todo desde el extranjero","why.c3.body":"Inscríbete, paga y actualiza la cobertura de tu familia desde donde vivas.",
+    "why.c4.title":"Creado con la diáspora, para la diáspora","why.c4.body":"Diseñado según cómo las familias haitianas realmente se apoyan entre sí a través de las fronteras.",
+    "faq.eyebrow":"Preguntas Frecuentes","faq.title":"Tus preguntas, respondidas.",
+    "faq.q1":"¿A quién puedo inscribir en una membresía Sante Lakay?","faq.a1":"Cualquier familiar que viva en Haití — padres, abuelos, hermanos, hijos, o familia extendida que apoyes. Un plan Familiar cubre hasta cuatro personas, con espacio para agregar más.",
+    "faq.q2":"¿Cómo pide ayuda mi familia en Haití?","faq.a2":"Llaman a un solo número de despacho, disponible 24/7. Nuestro equipo verifica el estado de la membresía y coordina la respuesta adecuada — ambulancia terrestre, evacuación aérea o traslado hospitalario.",
+    "faq.q3":"¿Desde dónde puedo inscribirme?","faq.a3":"Desde cualquier lugar. Sante Lakay está diseñado para la diáspora haitiana en todo el mundo — Estados Unidos, Canadá, Francia, República Dominicana, y más allá.",
+    "faq.q4":"¿Esto incluye seguro médico completo?","faq.a4":"Todavía no. Las membresías actuales cubren coordinación de emergencia, ambulancia y servicios de evacuación. Los planes de seguro médico completo — que cubren urgencias, hospitalización y farmacia — llegarán pronto.",
+    "faq.q5":"¿Puedo cancelar o cambiar mi plan?","faq.a5":"Sí. Puedes gestionar tu membresía, actualizar tus datos de pago y ajustar quién está cubierto directamente desde tu cuenta una vez que el portal de miembros esté activo.",
+    "cta.title":"Inscribe a tu familia hoy. Descansa tranquilo esta noche.","cta.body":"Inscribirse toma minutos. Le da a tu familia en Haití una línea de vida duradera.",
+    "cta.button":"Inscríbete Ahora","cta.contact":"Contáctanos",
+    "footer.tagline":"Salud en casa para la diáspora haitiana. Dondequiera que vivas, tu familia en Haití nunca está sola.",
+    "footer.col1.title":"Empresa","footer.col1.l1":"Sobre Sante Lakay","footer.col1.l2":"Cómo Funciona","footer.col1.l3":"Planes de Membresía","footer.col1.l4":"Preguntas Frecuentes",
+    "footer.col2.title":"Servicios","footer.col2.l1":"Servicios Médicos de Emergencia","footer.col2.l2":"Evacuaciones Médicas","footer.col2.l3":"Defensoría del Paciente","footer.col2.l4":"Acceso de Miembros",
+    "footer.col3.title":"Contacto","footer.col3.l1":"South Florida, EE. UU.","footer.col3.l2":"Puerto Príncipe, Haití",
+    "footer.copy":"© 2026 Sante Lakay. Todos los derechos reservados."
+  }
+};
+
+function applyTranslations(lang){
+  const dict = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(dict[key] !== undefined){ el.innerHTML = dict[key]; }
+  });
+  document.documentElement.lang = lang;
+}
+applyTranslations('en');
+
+const burger = document.getElementById('burger');
+burger.addEventListener('click', ()=>{
+  const nav = document.querySelector('.nav-links');
+  if(nav.style.display === 'flex'){
+    nav.style.display = 'none';
+  } else {
+    nav.style.display = 'flex';
+    nav.style.flexDirection = 'column';
+    nav.style.position = 'absolute';
+    nav.style.top = '64px';
+    nav.style.left = '0';
+    nav.style.right = '0';
+    nav.style.background = '#FBFAF7';
+    nav.style.padding = '20px 32px';
+    nav.style.borderBottom = '1px solid #D9E1E8';
+    nav.style.gap = '18px';
+  }
+});
+</script>
+</body>
+</html>
