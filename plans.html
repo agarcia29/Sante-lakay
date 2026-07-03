@@ -40,6 +40,7 @@
   .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 32px; max-width:var(--maxw); margin:0 auto;}
   .logo{display:flex; align-items:center; gap:10px; font-family:var(--display); font-weight:700; font-size:20px;}
   .logo-mark{width:30px; height:30px; flex-shrink:0;}
+  .logo img{object-fit: contain; object-position: left;}
   .nav-links{display:flex; align-items:center; gap:34px;}
   .nav-links a{font-size:14.5px; font-weight:500; color:var(--ink);}
   .nav-links a.current{color:var(--primary);}
@@ -131,23 +132,18 @@
 
 <header>
   <div class="nav">
-    <a href="index.html" class="logo">
-      <svg class="logo-mark" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="15" cy="15" r="14" stroke="#14477A" stroke-width="1.6"/>
-        <path d="M9 15.5C9 15.5 11.5 12 15 12C18.5 12 21 15.5 21 15.5" stroke="#E2A33B" stroke-width="1.6" stroke-linecap="round"/>
-        <circle cx="9" cy="15.5" r="1.6" fill="#14477A"/><circle cx="21" cy="15.5" r="1.6" fill="#14477A"/>
-      </svg>
-      Sante Lakay
+    <a href="#top" class="logo">
+      <img src="img/logo-sante-lakay.png" alt="Home" width="250" height="70">
     </a>
     <nav class="nav-links">
-      <a href="about.html">About</a>
-      <a href="how-it-works.html">How It Works</a>
-      <a href="plans.html" class="current">Plans</a>
-      <a href="index.html#faq">FAQ</a>
-      <a href="index.html#contact">Contact</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="how-it-works.html" data-i18n="nav.how">How It Works</a>
+      <a href="plans.html" data-i18n="nav.plans">Plans</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
     </nav>
     <div class="nav-right">
-      <a href="enroll.html" class="btn btn-primary">Enroll Now</a>
+      <a href="enroll.html" class="btn btn-primary" data-i18n="nav.enroll">Enroll Now</a>
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
