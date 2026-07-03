@@ -6,144 +6,25 @@
 <title>Membership Plans — Sante Lakay</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#0B2540; --primary:#14477A; --primary-2:#1D5C99; --primary-tint:#E4EEF7; --primary-tint-2:#CFE0F0;
-    --accent:#E2A33B; --accent-2:#C9862A; --paper:#FBFAF7; --paper-2:#F3F1EA; --line:#D9E1E8; --white:#FFFFFF; --muted:#5A6B7B;
-    --display:'Fraunces', Georgia, serif; --body:'Inter', -apple-system, sans-serif; --mono:'IBM Plex Mono', monospace; --maxw:1180px;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{font-family:var(--body); color:var(--ink); background:var(--paper); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
-  img{max-width:100%; display:block;}
-  a{color:inherit; text-decoration:none;}
-  ul{list-style:none;}
-  button{font-family:inherit; cursor:pointer; border:none; background:none;}
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
-  .eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--primary-2); font-weight:600; display:flex; align-items:center; gap:10px; margin-bottom:18px;}
-  .eyebrow::before{content:''; width:22px; height:1px; background:var(--accent);}
-  h1,h2,h3{font-family:var(--display); font-weight:600; color:var(--ink); letter-spacing:-.01em;}
-  h1{font-size:clamp(34px,4.8vw,58px); line-height:1.06;}
-  h2{font-size:clamp(28px,3.4vw,40px); line-height:1.14;}
-  h3{font-size:20px; line-height:1.3;}
-  p{color:var(--muted);}
-  .btn{display:inline-flex; align-items:center; gap:10px; padding:15px 28px; font-weight:600; font-size:15px; transition:transform .15s ease, background .15s ease;}
-  .btn-primary{background:var(--primary); color:var(--white);}
-  .btn-primary:hover{background:var(--ink); transform:translateY(-1px);}
-  .btn-ghost{background:transparent; color:var(--primary); border:1px solid var(--primary-tint-2);}
-  .btn-ghost:hover{border-color:var(--primary); background:var(--primary-tint);}
-  .btn-accent{background:var(--accent); color:#3A2408;}
-  .btn-accent:hover{background:var(--accent-2); transform:translateY(-1px);}
-
-  header{position:sticky; top:0; z-index:100; background:rgba(251,250,247,.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);}
-  .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 32px; max-width:var(--maxw); margin:0 auto;}
-  .logo{display:flex; align-items:center; gap:10px; font-family:var(--display); font-weight:700; font-size:20px;}
-  .logo-mark{width:30px; height:30px; flex-shrink:0;}
-  .logo img{object-fit: contain; object-position: left;}
-  .nav-links{display:flex; align-items:center; gap:34px;}
-  .nav-links a{font-size:14.5px; font-weight:500; color:var(--ink);}
-  .nav-links a.current{color:var(--primary);}
-  .nav-links a:hover{color:var(--primary);}
-  .nav-right{display:flex; align-items:center; gap:16px;}
-  .burger{display:none; flex-direction:column; gap:5px; padding:6px;}
-  .burger span{width:22px; height:2px; background:var(--ink);}
-
-  .photo-hero{position:relative; min-height:400px; display:flex; align-items:flex-end; overflow:hidden;}
-  .photo-hero img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.85); object-position:center 25%;}
-  .photo-hero::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(11,37,64,.5) 0%, rgba(11,37,64,.8) 100%);}
-  .photo-hero-content{position:relative; z-index:2; padding:76px 32px 52px; max-width:var(--maxw); margin:0 auto; width:100%;}
-  .photo-hero-content .eyebrow{color:var(--primary-tint-2);}
-  .photo-hero-content .eyebrow::before{background:var(--accent);}
-  .photo-hero-content h1{color:var(--white); max-width:620px;}
-  .photo-hero-content p{color:rgba(255,255,255,.82); max-width:520px; margin-top:16px; font-size:17px;}
-
-  section{padding:88px 0;}
-  .section-alt{background:var(--white); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
-  .section-tint{background:var(--primary-tint);}
-  .section-head{max-width:640px; margin-bottom:52px;}
-  .section-head.center{margin-left:auto; margin-right:auto; text-align:center;}
-
-  .plans-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
-  .plan-card{background:var(--white); border:1px solid var(--line); padding:40px 36px; display:flex; flex-direction:column;}
-  .plan-card.featured{border-color:var(--primary); box-shadow:0 20px 40px rgba(20,71,122,.1); position:relative;}
-  .plan-badge{position:absolute; top:-13px; left:36px; background:var(--accent); color:#3A2408; font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; font-weight:700; padding:5px 12px;}
-  .plan-name{font-family:var(--mono); font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-bottom:10px;}
-  .plan-price{display:flex; align-items:baseline; gap:8px; margin-bottom:4px;}
-  .plan-price .num{font-family:var(--display); font-size:44px; font-weight:600; color:var(--ink);}
-  .plan-price .per{font-size:14px; color:var(--muted);}
-  .plan-people{font-size:13.5px; color:var(--primary-2); font-weight:600; margin-bottom:24px;}
-  .plan-features{display:flex; flex-direction:column; gap:12px; margin-bottom:30px; flex:1;}
-  .plan-features li{display:flex; gap:10px; font-size:14.5px; color:var(--ink); align-items:flex-start;}
-  .plan-features svg{width:16px; height:16px; stroke:var(--accent-2); flex-shrink:0; margin-top:3px;}
-  .plans-note{margin-top:28px; font-size:13.5px; text-align:center; color:var(--muted);}
-
-  /* Short-term plans */
-  .short-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line);}
-  .short-card{background:var(--white); padding:34px 32px;}
-  .short-card .plan-price{margin-bottom:10px;}
-  .short-card .num{font-size:32px;}
-  .short-card p{font-size:14px; margin-top:6px;}
-  .short-card ul{margin-top:16px; display:flex; flex-direction:column; gap:8px;}
-  .short-card li{font-size:13.5px; color:var(--ink); display:flex; gap:8px;}
-  .short-card svg{width:14px; height:14px; stroke:var(--accent-2); flex-shrink:0; margin-top:3px;}
-
-  /* Comparison table */
-  .compare-table{width:100%; border-collapse:collapse; background:var(--white); border:1px solid var(--line);}
-  .compare-table th, .compare-table td{padding:16px 20px; text-align:left; border-bottom:1px solid var(--line); font-size:14.5px;}
-  .compare-table th{font-family:var(--mono); font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:600; background:var(--paper-2);}
-  .compare-table td:first-child{color:var(--ink); font-weight:500;}
-  .compare-table svg{width:16px; height:16px; stroke:var(--accent-2);}
-  .compare-table .dash{color:var(--line); font-size:16px;}
-
-  /* Roadmap */
-  .roadmap{display:flex; flex-direction:column; gap:0; max-width:720px; margin:0 auto;}
-  .rm-item{display:flex; gap:20px; padding:22px 0; border-top:1px solid var(--line);}
-  .rm-item:last-child{border-bottom:1px solid var(--line);}
-  .rm-dot{width:10px; height:10px; border-radius:50%; background:var(--accent); flex-shrink:0; margin-top:6px;}
-  .rm-body h3{font-size:16.5px; margin-bottom:4px;}
-  .rm-body p{font-size:14px;}
-
-  .cta-banner{background:var(--ink); color:var(--white); text-align:center; padding:96px 0; position:relative; overflow:hidden;}
-  .cta-banner::before{content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 0%, rgba(226,163,59,.14), transparent 60%);}
-  .cta-banner h2{color:var(--white); max-width:680px; margin:0 auto 18px; position:relative;}
-  .cta-banner p{color:rgba(255,255,255,.7); max-width:520px; margin:0 auto 36px; position:relative;}
-  .cta-banner .btn-row{display:flex; gap:16px; justify-content:center; position:relative; flex-wrap:wrap;}
-
-  footer{background:var(--paper-2); padding:48px 0 28px; border-top:1px solid var(--line);}
-  .footer-bottom{display:flex; justify-content:space-between; align-items:center; font-size:12.5px; color:var(--muted); flex-wrap:wrap; gap:12px;}
-  .footer-links{display:flex; gap:24px; flex-wrap:wrap;}
-  .footer-links a{font-size:13.5px; color:var(--ink);}
-  .footer-links a:hover{color:var(--primary);}
-
-  @media(max-width:920px){
-    .nav-links{display:none;} .burger{display:flex;}
-    .plans-grid{grid-template-columns:1fr;}
-    .short-grid{grid-template-columns:1fr;}
-    .compare-table{display:block; overflow-x:auto;}
-    section{padding:64px 0;}
-  }
-  @media(max-width:560px){
-    .wrap{padding:0 20px;} .nav{padding:16px 20px;}
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
 <header>
   <div class="nav">
-    <a href="#top" class="logo">
-      <img src="img/logo-sante-lakay.png" alt="Home" width="250" height="70">
+    <a href="index.html" class="logo">
+      <img src="img/logo-sante-lakay.png" alt="Home">
     </a>
     <nav class="nav-links">
-      <a href="about.html" data-i18n="nav.about">About</a>
-      <a href="how-it-works.html" data-i18n="nav.how">How It Works</a>
-      <a href="plans.html" data-i18n="nav.plans">Plans</a>
-      <a href="#faq" data-i18n="nav.faq">FAQ</a>
-      <a href="#contact" data-i18n="nav.contact">Contact</a>
+      <a href="about.html">About</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="plans.html" class="current">Plans</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#contact">Contact</a>
     </nav>
     <div class="nav-right">
-      <a href="enroll.html" class="btn btn-primary" data-i18n="nav.enroll">Enroll Now</a>
+      <a href="enroll.html" class="btn btn-primary">Enroll Now</a>
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>

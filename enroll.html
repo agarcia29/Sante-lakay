@@ -6,129 +6,15 @@
 <title>Enroll — Sante Lakay</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#0B2540; --primary:#14477A; --primary-2:#1D5C99; --primary-tint:#E4EEF7; --primary-tint-2:#CFE0F0;
-    --accent:#E2A33B; --accent-2:#C9862A; --paper:#FBFAF7; --paper-2:#F3F1EA; --line:#D9E1E8; --white:#FFFFFF; --muted:#5A6B7B;
-    --error:#B3452C;
-    --display:'Fraunces', Georgia, serif; --body:'Inter', -apple-system, sans-serif; --mono:'IBM Plex Mono', monospace; --maxw:840px;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{font-family:var(--body); color:var(--ink); background:var(--paper); line-height:1.55; -webkit-font-smoothing:antialiased;}
-  img{max-width:100%; display:block;}
-  a{color:inherit; text-decoration:none;}
-  ul{list-style:none;}
-  button{font-family:inherit; cursor:pointer;}
-  input, select{font-family:inherit;}
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
-  h1,h2,h3{font-family:var(--display); font-weight:600; color:var(--ink); letter-spacing:-.01em;}
-  h2{font-size:clamp(24px,3vw,32px); line-height:1.2;}
-  h3{font-size:16.5px;}
-  p{color:var(--muted);}
-
-  header{border-bottom:1px solid var(--line); background:var(--white);}
-  .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 24px; max-width:1180px; margin:0 auto;}
-  .logo{display:flex; align-items:center; gap:10px; font-family:var(--display); font-weight:700; font-size:19px;}
-  .logo-mark{width:28px; height:28px; flex-shrink:0;}
-  .logo img{object-fit: contain; object-position: left;}
-  .exit-link{font-size:13.5px; font-weight:600; color:var(--muted); display:flex; align-items:center; gap:6px;}
-  .exit-link:hover{color:var(--primary);}
-
-  /* Progress bar */
-  .progress-wrap{background:var(--white); border-bottom:1px solid var(--line); padding:22px 0;}
-  .progress{display:flex; align-items:center; justify-content:space-between; max-width:640px; margin:0 auto; padding:0 24px;}
-  .p-step{display:flex; flex-direction:column; align-items:center; gap:8px; flex:1; position:relative;}
-  .p-step:not(:last-child)::after{content:''; position:absolute; top:13px; left:calc(50% + 22px); right:calc(-50% + 22px); height:1px; background:var(--line);}
-  .p-step.done:not(:last-child)::after{background:var(--accent);}
-  .p-circle{width:26px; height:26px; border-radius:50%; background:var(--white); border:1.5px solid var(--line); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:11.5px; font-weight:600; color:var(--muted); z-index:1;}
-  .p-step.active .p-circle{border-color:var(--primary); color:var(--primary); background:var(--primary-tint);}
-  .p-step.done .p-circle{border-color:var(--accent); background:var(--accent); color:#3A2408;}
-  .p-label{font-size:11.5px; font-weight:600; color:var(--muted); text-align:center;}
-  .p-step.active .p-label{color:var(--ink);}
-
-  main{padding:52px 0 100px;}
-  .step-panel{display:none;}
-  .step-panel.active{display:block;}
-  .eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--primary-2); font-weight:600; margin-bottom:10px;}
-  .step-head{margin-bottom:36px;}
-  .step-head p{margin-top:8px; font-size:15px;}
-
-  /* Plan cards */
-  .plan-pick-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px;}
-  .plan-pick{border:1.5px solid var(--line); background:var(--white); padding:24px; text-align:left; cursor:pointer; transition:border-color .15s ease;}
-  .plan-pick:hover{border-color:var(--primary-2);}
-  .plan-pick.selected{border-color:var(--primary); background:var(--primary-tint);}
-  .plan-pick .pp-name{font-family:var(--mono); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:600; margin-bottom:8px;}
-  .plan-pick .pp-price{font-family:var(--display); font-size:26px; font-weight:600; color:var(--ink);}
-  .plan-pick .pp-price span{font-family:var(--body); font-size:13px; color:var(--muted); font-weight:400;}
-  .plan-pick .pp-desc{font-size:13px; margin-top:6px;}
-  .short-toggle{display:flex; gap:8px; margin-bottom:20px;}
-  .short-toggle button{padding:8px 16px; border:1px solid var(--line); background:var(--white); font-size:13px; font-weight:600; color:var(--muted);}
-  .short-toggle button.active{border-color:var(--primary); color:var(--primary); background:var(--primary-tint);}
-
-  /* Family member cards */
-  .member-card{border:1px solid var(--line); background:var(--white); padding:22px; margin-bottom:14px; position:relative;}
-  .member-card .m-title{font-family:var(--mono); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--primary-2); font-weight:600; margin-bottom:16px;}
-  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;}
-  .field-row.three{grid-template-columns:1.4fr 1fr 1fr;}
-  .field{display:flex; flex-direction:column; gap:6px;}
-  .field label{font-size:12.5px; font-weight:600; color:var(--ink);}
-  .field input, .field select{padding:11px 13px; border:1px solid var(--line); background:var(--paper); font-size:14.5px; color:var(--ink);}
-  .field input:focus, .field select:focus{outline:2px solid var(--primary-2); outline-offset:1px; background:var(--white);}
-  .remove-member{position:absolute; top:18px; right:18px; font-size:12px; color:var(--error); font-weight:600;}
-  .add-member{display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:var(--primary); padding:12px 0;}
-  .add-member svg{width:16px; height:16px; stroke:var(--primary);}
-  .member-limit-note{font-size:13px; margin-top:6px;}
-
-  /* Payment mock */
-  .card-visual{background:linear-gradient(135deg, var(--ink), var(--primary)); color:#fff; border-radius:4px; padding:26px; margin-bottom:28px; max-width:360px;}
-  .card-visual .cv-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:36px;}
-  .card-visual .cv-chip{width:34px; height:24px; background:rgba(255,255,255,.25); border-radius:3px;}
-  .card-visual .cv-num{font-family:var(--mono); font-size:16px; letter-spacing:2px; margin-bottom:16px;}
-  .card-visual .cv-bottom{display:flex; justify-content:space-between; font-size:11px; color:rgba(255,255,255,.7); font-family:var(--mono); text-transform:uppercase;}
-  .demo-banner{background:var(--primary-tint); border:1px solid var(--primary-tint-2); padding:14px 18px; font-size:13.5px; color:var(--primary-2); margin-bottom:28px; display:flex; gap:10px; align-items:flex-start;}
-  .demo-banner svg{width:16px; height:16px; stroke:var(--primary-2); flex-shrink:0; margin-top:2px;}
-
-  /* Summary */
-  .summary-box{border:1px solid var(--line); background:var(--white); padding:24px; margin-bottom:24px;}
-  .summary-row{display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--line); font-size:14.5px;}
-  .summary-row:last-child{border-bottom:none;}
-  .summary-row .label{color:var(--muted);}
-  .summary-row .value{color:var(--ink); font-weight:600; text-align:right;}
-  .summary-total{display:flex; justify-content:space-between; padding-top:16px; margin-top:6px; border-top:1.5px solid var(--ink); font-size:16px; font-weight:600;}
-
-  /* Buttons */
-  .step-nav{display:flex; justify-content:space-between; align-items:center; margin-top:38px; gap:16px;}
-  .btn{display:inline-flex; align-items:center; gap:8px; padding:14px 26px; font-weight:600; font-size:14.5px; border:none; transition:transform .15s ease, background .15s ease;}
-  .btn-primary{background:var(--primary); color:#fff;}
-  .btn-primary:hover{background:var(--ink);}
-  .btn-primary:disabled{background:var(--line); color:var(--muted); cursor:not-allowed;}
-  .btn-text{background:none; color:var(--muted); font-weight:600; padding:14px 6px;}
-  .btn-text:hover{color:var(--ink);}
-  .error-text{color:var(--error); font-size:12.5px; margin-top:4px; display:none;}
-
-  /* Confirmation */
-  .confirm-wrap{text-align:center; padding:20px 0;}
-  .confirm-icon{width:64px; height:64px; border-radius:50%; background:var(--primary-tint); display:flex; align-items:center; justify-content:center; margin:0 auto 24px;}
-  .confirm-icon svg{width:30px; height:30px; stroke:var(--primary);}
-  .confirm-id{font-family:var(--mono); font-size:13px; color:var(--primary-2); background:var(--primary-tint); display:inline-block; padding:8px 16px; margin:18px 0;}
-
-  @media(max-width:640px){
-    .plan-pick-grid{grid-template-columns:1fr;}
-    .field-row, .field-row.three{grid-template-columns:1fr;}
-    .p-label{display:none;}
-    .step-nav{flex-direction:column-reverse; align-items:stretch;}
-    .step-nav .btn, .step-nav button{width:100%; justify-content:center;}
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body class="enroll-page">
 
 <header>
   <div class="nav">
     <a href="index.html" class="logo">
-      <img src="img/logo-sante-lakay.png" alt="Home" width="250" height="70">
+      <img src="img/logo-sante-lakay.png" alt="Home">
     </a>
     <a href="index.html" class="exit-link">✕ Exit enrollment</a>
   </div>
