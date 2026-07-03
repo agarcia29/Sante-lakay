@@ -118,6 +118,10 @@
   @keyframes pulse{0%,100%{opacity:.35; r:5;} 50%{opacity:1; r:8;}}
   .dashflow{stroke-dasharray:6 8; animation:dash 1.6s linear infinite;}
   @keyframes dash{to{stroke-dashoffset:-28;}}
+  .signal-status{display:flex; align-items:center; gap:9px; position:relative; margin:2px 0 22px; padding-top:18px; border-top:1px solid rgba(255,255,255,.12);}
+  .signal-dot{width:7px; height:7px; border-radius:50%; background:#E2A33B; flex-shrink:0; animation:signalBlink 2.6s ease-in-out infinite;}
+  @keyframes signalBlink{0%,100%{opacity:.35;} 50%{opacity:1;}}
+  #signalText{font-family:var(--mono); font-size:11.5px; letter-spacing:.03em; color:rgba(255,255,255,.75); transition:opacity .35s ease;}
   .lifeline-caption{font-size:14px; color:rgba(255,255,255,.82); position:relative; line-height:1.6;}
   .lifeline-caption strong{color:var(--white); font-family:var(--display); font-size:17px; display:block; margin-bottom:6px; font-weight:600;}
 
@@ -150,6 +154,7 @@
   .service-card p{font-size:13.5px;}
 
   /* ---- Plans ---- */
+  .plan-price-sub{font-size:12.5px; color:var(--muted); margin-bottom:6px; transition:opacity .2s ease;}
   .plans-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
   .plan-card{background:var(--white); border:1px solid var(--line); padding:40px 36px; display:flex; flex-direction:column;}
   .plan-card.featured{border-color:var(--primary); box-shadow:0 20px 40px rgba(20,71,122,.1); position:relative;}
@@ -239,7 +244,7 @@
       Sante Lakay
     </a>
     <nav class="nav-links">
-      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
       <a href="how-it-works.html" data-i18n="nav.how">How It Works</a>
       <a href="plans.html" data-i18n="nav.plans">Plans</a>
       <a href="#faq" data-i18n="nav.faq">FAQ</a>
@@ -282,16 +287,46 @@
       </div>
       <div class="lifeline-card">
         <div class="lifeline-tag" data-i18n="hero.card.tag">Live connection</div>
-        <svg class="lifeline-svg" viewBox="0 0 320 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="34" y1="70" x2="286" y2="70" stroke="rgba(255,255,255,.25)" stroke-width="1.4"/>
-          <line class="dashflow" x1="34" y1="70" x2="286" y2="70" stroke="#E2A33B" stroke-width="1.6"/>
-          <circle class="pulse" cx="34" cy="70" r="6" fill="#E2A33B"/>
-          <circle cx="34" cy="70" r="3" fill="#FBFAF7"/>
-          <circle class="pulse" cx="286" cy="70" r="6" fill="#FBFAF7" style="animation-delay:1.3s"/>
-          <circle cx="286" cy="70" r="3" fill="#E2A33B"/>
-          <text x="10" y="110" fill="rgba(255,255,255,.65)" font-family="IBM Plex Mono" font-size="10" letter-spacing="1">DIASPORA</text>
-          <text x="236" y="110" fill="rgba(255,255,255,.65)" font-family="IBM Plex Mono" font-size="10" letter-spacing="1">HAITI</text>
+        <svg class="lifeline-svg" id="lifelineSvg" viewBox="0 0 320 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="160" y="66" fill="rgba(255,255,255,.4)" font-family="IBM Plex Mono" font-size="8.5" text-anchor="middle" letter-spacing="1.4">24/7 DIRECT LINE</text>
+
+          <line x1="60" y1="90" x2="260" y2="90" stroke="rgba(255,255,255,.2)" stroke-width="1.4"/>
+          <line class="dashflow" x1="60" y1="90" x2="260" y2="90" stroke="rgba(226,163,59,.55)" stroke-width="1.2"/>
+
+          <!-- signal traveling: you → family -->
+          <circle r="3.5" fill="#E2A33B" cy="90">
+            <animate attributeName="cx" values="60;260" dur="2.6s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.85;1" dur="2.6s" repeatCount="indefinite"/>
+          </circle>
+          <!-- signal traveling: family → you -->
+          <circle r="3.5" fill="#FBFAF7" cy="90">
+            <animate attributeName="cx" values="260;60" dur="2.6s" begin="1.3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.85;1" dur="2.6s" begin="1.3s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- left node: you, abroad -->
+          <circle cx="40" cy="90" r="22" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.28)" stroke-width="1"/>
+          <circle class="pulse" cx="58" cy="75" r="4" fill="#E2A33B"/>
+          <circle cx="40" cy="83" r="5" fill="#FBFAF7"/>
+          <path d="M29 101c0-6.5 5-11.5 11-11.5s11 5 11 11.5" stroke="#FBFAF7" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+
+          <!-- right node: family, Haiti -->
+          <circle cx="280" cy="90" r="22" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.28)" stroke-width="1"/>
+          <circle class="pulse" cx="262" cy="75" r="4" fill="#FBFAF7" style="animation-delay:1.3s"/>
+          <path d="M269 90l11-9.5 11 9.5" stroke="#FBFAF7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M271.5 88.5v12.5h17V88.5" stroke="#FBFAF7" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+          <text x="280" y="98" font-family="IBM Plex Mono" font-size="8" text-anchor="middle" fill="#E2A33B">♥</text>
+
+          <text x="40" y="134" fill="#FBFAF7" font-family="IBM Plex Mono" font-size="11" font-weight="600" text-anchor="middle" letter-spacing=".5">YOU</text>
+          <text x="40" y="149" fill="rgba(255,255,255,.55)" font-family="IBM Plex Mono" font-size="8.5" text-anchor="middle" letter-spacing=".8">ABROAD</text>
+
+          <text x="280" y="134" fill="#FBFAF7" font-family="IBM Plex Mono" font-size="11" font-weight="600" text-anchor="middle" letter-spacing=".5">YOUR FAMILY</text>
+          <text x="280" y="149" fill="rgba(255,255,255,.55)" font-family="IBM Plex Mono" font-size="8.5" text-anchor="middle" letter-spacing=".8">HAITI</text>
         </svg>
+        <div class="signal-status">
+          <span class="signal-dot"></span>
+          <span id="signalText">Family calls the dispatch line</span>
+        </div>
         <div class="lifeline-caption">
           <strong data-i18n="hero.card.title">One membership. One lifeline.</strong>
           <span data-i18n="hero.card.body">Wherever you live — Miami, Montréal, Paris, Santo Domingo — your enrollment keeps a direct line open to emergency care for the people you love.</span>
@@ -307,6 +342,7 @@
         <div class="eyebrow" data-i18n="about.eyebrow">What Is Sante Lakay</div>
         <h2 data-i18n="about.title">Peace of mind, delivered across the water.</h2>
         <p style="margin-top:20px; font-size:16px;" data-i18n="about.body">Sante Lakay ("Home Health") is a medical membership built for Haitians living abroad. You enroll and pay from wherever you are — the United States, Canada, France, the Dominican Republic, anywhere. Your family in Haiti gets a direct line to emergency medical support whenever they need it, backed by a dispatch center and a network of ambulance, air, and ground rescue partners on the ground in Haiti.</p>
+        <a href="about.html" class="btn btn-ghost" style="margin-top:26px;" data-i18n="about.readmore">Read More About Us</a>
       </div>
       <div class="about-points">
         <div class="about-point">
@@ -415,6 +451,7 @@
         <div class="plan-card">
           <div class="plan-name" data-i18n="plans.individual.name">Individual</div>
           <div class="plan-price"><span class="num">$19.99</span><span class="per" data-i18n="plans.individual.per">/ month</span></div>
+          <div style="font-size:13px;color:var(--muted);margin-bottom:6px;">or $220/year</div>
           <div class="plan-people" data-i18n="plans.individual.people">Covers 1 family member in Haiti</div>
           <ul class="plan-features">
             <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="plans.individual.f1">24/7 medical support</span></li>
@@ -429,6 +466,7 @@
           <div class="plan-badge" data-i18n="plans.family.badge">Most Popular</div>
           <div class="plan-name" data-i18n="plans.family.name">Family / Group</div>
           <div class="plan-price"><span class="num">$29.99</span><span class="per" data-i18n="plans.family.per">/ month</span></div>
+          <div style="font-size:13px;color:var(--muted);margin-bottom:6px;">or $340/year</div>
           <div class="plan-people" data-i18n="plans.family.people">Covers up to 4 family members in Haiti</div>
           <ul class="plan-features">
             <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="plans.family.f1">24/7 medical support</span></li>
@@ -540,7 +578,7 @@
       </div>
       <div class="footer-col">
         <h4 data-i18n="footer.col1.title">Company</h4>
-        <a href="#about" data-i18n="footer.col1.l1">About Sante Lakay</a>
+        <a href="about.html" data-i18n="footer.col1.l1">About Sante Lakay</a>
         <a href="how-it-works.html" data-i18n="footer.col1.l2">How It Works</a>
         <a href="plans.html" data-i18n="footer.col1.l3">Membership Plans</a>
         <a href="#faq" data-i18n="footer.col1.l4">FAQ</a>
@@ -579,6 +617,7 @@ const translations = {
     "hero.card.body":"Wherever you live — Miami, Montréal, Paris, Santo Domingo — your enrollment keeps a direct line open to emergency care for the people you love.",
     "about.eyebrow":"What Is Sante Lakay","about.title":"Peace of mind, delivered across the water.",
     "about.body":"Sante Lakay (\"Home Health\") is a medical membership built for Haitians living abroad. You enroll and pay from wherever you are — the United States, Canada, France, the Dominican Republic, anywhere. Your family in Haiti gets a direct line to emergency medical support whenever they need it, backed by a dispatch center and a network of ambulance, air, and ground rescue partners on the ground in Haiti.",
+    "about.readmore":"Read More About Us",
     "about.point1.title":"Built on family, not just coverage","about.point1.body":"Haitian culture is collectivist — caring for family abroad is an honor, not an obligation. Sante Lakay gives that instinct a reliable system.",
     "about.point2.title":"Ready from day one","about.point2.body":"No waiting rooms, no bureaucracy to navigate from abroad. Enrollment takes minutes and coverage activates immediately.",
     "about.point3.title":"A trusted local network","about.point3.body":"Our dispatch center and rescue partners are based in Port-au-Prince, with a growing Guardian Network of medical professionals in rural regions.",
@@ -788,6 +827,31 @@ function applyTranslations(lang){
   document.documentElement.lang = lang;
 }
 applyTranslations('en');
+
+// Lifeline signal status cycler — synced roughly to the traveling dot animation
+const signalMessages = [
+  "Family calls the dispatch line",
+  "Dispatch verifies membership",
+  "Ambulance or Guardian dispatched",
+  "You're notified of the update"
+];
+let signalIndex = 0;
+const signalTextEl = document.getElementById('signalText');
+if(signalTextEl){
+  setInterval(()=>{
+    signalIndex = (signalIndex + 1) % signalMessages.length;
+    signalTextEl.style.opacity = 0;
+    setTimeout(()=>{
+      signalTextEl.textContent = signalMessages[signalIndex];
+      signalTextEl.style.opacity = 1;
+    }, 350);
+  }, 2600);
+}
+
+// Respect prefers-reduced-motion for the SVG signal animation
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('#lifelineSvg animate').forEach(a => a.setAttribute('repeatCount','0'));
+}
 
 const burger = document.getElementById('burger');
 burger.addEventListener('click', ()=>{
