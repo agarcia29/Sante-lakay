@@ -108,6 +108,23 @@
     </div>
   </section>
 
+  <!-- THE STORY: why we exist -->
+  <section class="story-section" id="storySection">
+    <div class="wrap story-wrap">
+      <div class="eyebrow" style="color:var(--primary-tint-2); justify-content:center;" data-i18n="story.eyebrow">This Is Why We Exist</div>
+      <div class="story-lines">
+        <p class="story-line" data-i18n="story.line1">It's 2:14 PM in Miami.</p>
+        <p class="story-line" data-i18n="story.line2">Your phone rings.</p>
+        <p class="story-line story-line-emphasis" data-i18n="story.line3">Your mother has collapsed in Port-au-Prince.</p>
+        <p class="story-line" data-i18n="story.line4">You are 1,100 miles away.</p>
+        <p class="story-line story-line-beat" data-i18n="story.line5">You make one call.</p>
+      </div>
+      <p class="story-resolution" data-i18n="story.resolution">Sante Lakay coordinates the ambulance, the doctors, the hospital — and, if needed, an emergency air evacuation.</p>
+      <p class="story-closing" data-i18n="story.closing">This is what your membership actually buys: someone who answers, and acts, the moment it matters most.</p>
+      <a href="#how" class="btn btn-ghost story-cta" data-i18n="story.cta">See Exactly How It Works ↓</a>
+    </div>
+  </section>
+
   <!-- ABOUT -->
   <section id="about" class="section-alt">
     <div class="wrap about-grid">
@@ -118,15 +135,15 @@
         <a href="about.html" class="btn btn-ghost" style="margin-top:26px;" data-i18n="about.readmore">Read More About Us</a>
       </div>
       <div class="about-points">
-        <div class="about-point">
+        <div class="about-point reveal">
           <div class="point-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.5-9.2C.7 8.1 2.4 4.5 6 4.1c2-.2 3.6.8 4.9 2.3.4.5 1 .5 1.4 0C13.6 4.9 15.2 3.9 17.2 4.1c3.6.4 5.3 4 3.5 7.7C18.1 16.4 12 21 12 21Z"/></svg></div>
           <div><h3 data-i18n="about.point1.title">Built on family, not just coverage</h3><p data-i18n="about.point1.body">Haitian culture is collectivist — caring for family abroad is an honor, not an obligation. Sante Lakay gives that instinct a reliable system.</p></div>
         </div>
-        <div class="about-point">
+        <div class="about-point reveal">
           <div class="point-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></div>
           <div><h3 data-i18n="about.point2.title">Ready from day one</h3><p data-i18n="about.point2.body">No waiting rooms, no bureaucracy to navigate from abroad. Enrollment takes minutes and coverage activates immediately.</p></div>
         </div>
-        <div class="about-point">
+        <div class="about-point reveal">
           <div class="point-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4Z"/></svg></div>
           <div><h3 data-i18n="about.point3.title">A trusted local network</h3><p data-i18n="about.point3.body">Our dispatch center and rescue partners are based in Port-au-Prince, with a growing Guardian Network of medical professionals in rural regions.</p></div>
         </div>
@@ -142,20 +159,118 @@
         <h2 data-i18n="how.title">Three steps, from anywhere in the world.</h2>
       </div>
       <div class="steps">
-        <div class="step">
+        <div class="step reveal">
           <span class="step-num">01</span>
           <h3 data-i18n="how.step1.title">Choose a plan</h3>
           <p data-i18n="how.step1.body">Pick an Individual or Group membership based on how many family members in Haiti you want covered.</p>
         </div>
-        <div class="step">
+        <div class="step reveal">
           <span class="step-num">02</span>
           <h3 data-i18n="how.step2.title">Add your family</h3>
           <p data-i18n="how.step2.body">Enter their names and phone numbers in Haiti. They'll receive a message in Kreyòl explaining their new coverage and who to call.</p>
         </div>
-        <div class="step">
+        <div class="step reveal">
           <span class="step-num">03</span>
           <h3 data-i18n="how.step3.title">We're on call, 24/7</h3>
           <p data-i18n="how.step3.body">Your membership renews automatically. If a medical emergency happens, your family calls one number — day or night.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE JOURNEY: what happens when your mother gets sick -->
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="section-head center">
+        <div class="eyebrow" style="justify-content:center;" data-i18n="journey.eyebrow">A Common Question</div>
+        <h2 data-i18n="journey.title">"What happens when my mother gets sick?"</h2>
+        <p data-i18n="journey.subtitle">Here's exactly what happens — from the moment you enroll to the moment your family reaches the hospital.</p>
+      </div>
+
+      <div class="journey" id="journeyList">
+        <div class="journey-progress" id="journeyProgress"></div>
+
+        <div class="journey-step">
+          <div class="journey-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.5 11.5 15 16 9.5"/><circle cx="12" cy="12" r="9"/></svg>
+          </div>
+          <span class="journey-tag" data-i18n="journey.step1.tag">Step 1</span>
+          <h3 class="journey-title" data-i18n="journey.step1.title">You enroll</h3>
+          <p class="journey-desc" data-i18n="journey.step1.body">Choose a plan and sign up in minutes, from anywhere in the world.</p>
+        </div>
+
+        <div class="journey-step">
+          <div class="journey-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2s6.5 2.6 6.5 6.2"/><path d="M16 4.5c1.6.4 2.8 1.9 2.8 3.6 0 1.8-1.2 3.2-2.8 3.6"/><path d="M17.5 14c2.1.5 3.6 2.5 3.6 4.8"/></svg>
+          </div>
+          <span class="journey-tag" data-i18n="journey.step2.tag">Step 2</span>
+          <h3 class="journey-title" data-i18n="journey.step2.title">Your family is registered</h3>
+          <p class="journey-desc" data-i18n="journey.step2.body">Your mother and any other family members in Haiti are added to the system and notified in Kreyòl.</p>
+        </div>
+
+        <div class="journey-step journey-step-critical">
+          <div class="journey-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 20h20L12 2Z"/><path d="M12 9v5M12 17h.01"/></svg>
+          </div>
+          <span class="journey-tag" data-i18n="journey.step3.tag">Step 3</span>
+          <h3 class="journey-title" data-i18n="journey.step3.title">A medical emergency happens</h3>
+          <p class="journey-desc" data-i18n="journey.step3.body">A fall, a fever, a crisis — the kind of moment where every minute matters.</p>
+        </div>
+
+        <div class="journey-step">
+          <div class="journey-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 0 1 2-2h2.2a1 1 0 0 1 1 .8l1 4a1 1 0 0 1-.5 1.1L6.6 10a12.6 12.6 0 0 0 6.4 6.4l1.1-2.1a1 1 0 0 1 1.1-.5l4 1a1 1 0 0 1 .8 1V19a2 2 0 0 1-2 2C11.6 21 3 12.4 3 5Z"/></svg>
+          </div>
+          <span class="journey-tag" data-i18n="journey.step4.tag">Step 4</span>
+          <h3 class="journey-title" data-i18n="journey.step4.title">24/7 emergency service answers</h3>
+          <p class="journey-desc" data-i18n="journey.step4.body">Your family calls one number. Our dispatch team in Port-au-Prince picks up immediately, day or night.</p>
+        </div>
+
+        <div class="journey-step">
+          <div class="journey-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h13v-5H8l-3 5ZM16 12h4l2 3v2h-6"/><circle cx="7" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg>
+          </div>
+          <span class="journey-tag" data-i18n="journey.step5.tag">Step 5</span>
+          <h3 class="journey-title" data-i18n="journey.step5.title">Ground ambulance is dispatched</h3>
+          <p class="journey-desc" data-i18n="journey.step5.body">We coordinate the right response — ambulance, a Guardian Network doctor, or evacuation if needed.</p>
+        </div>
+
+        <div class="journey-step">
+          <div class="journey-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M12 7v6M9 10h6"/><path d="M9 21v-3h6v3"/></svg>
+          </div>
+          <span class="journey-tag" data-i18n="journey.step6.tag">Step 6</span>
+          <h3 class="journey-title" data-i18n="journey.step6.title">Your mother reaches the hospital</h3>
+          <p class="journey-desc" data-i18n="journey.step6.body">A patient advocate coordinates her care and keeps your family abroad informed the entire time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY WE'RE DIFFERENT -->
+  <section>
+    <div class="wrap">
+      <div class="section-head center">
+        <div class="eyebrow" style="justify-content:center;" data-i18n="different.eyebrow">Why We're Different</div>
+        <h2 data-i18n="different.title">This isn't insurance. It's a rapid response team for your family.</h2>
+        <p data-i18n="different.subtitle">Most people hear "medical membership" and assume it works like insurance. It doesn't — and that difference is the whole point.</p>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-card compare-card-muted reveal">
+          <span class="compare-label" data-i18n="different.left.label">What People Assume</span>
+          <h3 data-i18n="different.left.title">"This is insurance."</h3>
+          <p data-i18n="different.left.body">Traditional insurance reimburses medical bills after the fact. You pay first, file a claim, and wait. It doesn't answer the phone when something happens — it just pays for it later, if you're covered.</p>
+        </div>
+        <div class="compare-card compare-card-primary reveal">
+          <span class="compare-label" data-i18n="different.right.label">What Sante Lakay Does</span>
+          <h3 data-i18n="different.right.title">We coordinate the emergency itself.</h3>
+          <ul class="compare-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="different.right.i1">We answer the phone</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="different.right.i2">We send help</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="different.right.i3">We organize transport</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="different.right.i4">We coordinate evacuations</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="different.right.i5">We stay with your family every step of the way</span></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -169,42 +284,42 @@
         <h2 data-i18n="included.title">Every membership includes.</h2>
       </div>
       <div class="services-grid">
-        <div class="service-card">
+        <div class="service-card reveal">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           <h3 data-i18n="included.s1.title">24/7 Emergency Coordination</h3>
           <p data-i18n="included.s1.body">A dispatch center standing by around the clock, every day of the year.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h13v-5H8l-3 5ZM16 12h4l2 3v2h-6"/><circle cx="7" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg>
           <h3 data-i18n="included.s2.title">Ground Ambulance Service</h3>
           <p data-i18n="included.s2.body">Rapid ground transport to the nearest appropriate facility.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2 5h5l-4 4 1.5 5.5L12 13l-4.5 3.5L9 11 5 7h5l2-5Z"/></svg>
           <h3 data-i18n="included.s3.title">Air & Fixed-Wing Evacuation</h3>
           <p data-i18n="included.s3.body">Helicopter and airplane evacuation for cases requiring a higher level of care.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.5-9.2C.7 8.1 2.4 4.5 6 4.1c2-.2 3.6.8 4.9 2.3.4.5 1 .5 1.4 0C13.6 4.9 15.2 3.9 17.2 4.1c3.6.4 5.3 4 3.5 7.7C18.1 16.4 12 21 12 21Z"/></svg>
           <h3 data-i18n="included.s4.title">Transfers to Higher Care</h3>
           <p data-i18n="included.s4.body">Coordinated transfer between facilities when specialist care is needed.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
           <h3 data-i18n="included.s5.title">Patient Advocacy</h3>
           <p data-i18n="included.s5.body">Someone in your family's corner, coordinating care and communicating with hospitals.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c0 3-3 5-7 5s-7-2-7-5 3-5 7-5 7 2 7 5Z"/><path d="M12 9V3M9 5l3-2 3 2"/></svg>
           <h3 data-i18n="included.s6.title">Hospital & Specialist Access</h3>
           <p data-i18n="included.s6.body">Coordination with hospitals and specialists across our care network.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
           <h3 data-i18n="included.s7.title">Rapid Response</h3>
           <p data-i18n="included.s7.body">A dispatch process built for speed when every minute counts.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card reveal">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
           <h3 data-i18n="included.s8.title">Emergency Medical Assistance</h3>
           <p data-i18n="included.s8.body">Guidance and support for your family from the very first call.</p>
@@ -221,7 +336,7 @@
         <h2 data-i18n="plans.title">Simple pricing. Real protection.</h2>
       </div>
       <div class="plans-grid">
-        <div class="plan-card">
+        <div class="plan-card reveal">
           <div class="plan-name" data-i18n="plans.individual.name">Individual</div>
           <div class="plan-price"><span class="num">$19.99</span><span class="per" data-i18n="plans.individual.per">/ month</span></div>
           <div style="font-size:13px;color:var(--muted);margin-bottom:6px;">or $220/year</div>
@@ -235,7 +350,7 @@
           </ul>
           <a href="enroll.html?plan=individual" class="btn btn-ghost" style="justify-content:center;" data-i18n="plans.cta">Enroll Now</a>
         </div>
-        <div class="plan-card featured">
+        <div class="plan-card featured reveal">
           <div class="plan-badge" data-i18n="plans.family.badge">Most Popular</div>
           <div class="plan-name" data-i18n="plans.family.name">Family / Group</div>
           <div class="plan-price"><span class="num">$29.99</span><span class="per" data-i18n="plans.family.per">/ month</span></div>
@@ -264,22 +379,22 @@
         <h2 data-i18n="why.title">A safety net your family in Haiti can count on.</h2>
       </div>
       <div class="why-grid">
-        <div class="why-card">
+        <div class="why-card reveal">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4Z"/></svg>
           <h3 data-i18n="why.c1.title">A dispatch center on the ground</h3>
           <p data-i18n="why.c1.body">Based in Port-au-Prince and staffed 24/7, so calls are answered day and night.</p>
         </div>
-        <div class="why-card">
+        <div class="why-card reveal">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
           <h3 data-i18n="why.c2.title">A network built for rural Haiti</h3>
           <p data-i18n="why.c2.body">Our Guardian Network places medical professionals in areas without full-time coverage.</p>
         </div>
-        <div class="why-card">
+        <div class="why-card reveal">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 2v4"/></svg>
           <h3 data-i18n="why.c3.title">Manage everything from abroad</h3>
           <p data-i18n="why.c3.body">Enroll, pay, and update your family's coverage from wherever you live.</p>
         </div>
-        <div class="why-card">
+        <div class="why-card reveal">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.5-9.2C.7 8.1 2.4 4.5 6 4.1c2-.2 3.6.8 4.9 2.3.4.5 1 .5 1.4 0C13.6 4.9 15.2 3.9 17.2 4.1c3.6.4 5.3 4 3.5 7.7C18.1 16.4 12 21 12 21Z"/></svg>
           <h3 data-i18n="why.c4.title">Built with the diaspora, for the diaspora</h3>
           <p data-i18n="why.c4.body">Designed around how Haitian families actually support one another across borders.</p>
@@ -296,23 +411,23 @@
         <h2 data-i18n="faq.title">Questions, answered.</h2>
       </div>
       <div class="faq-list">
-        <details class="faq-item" open>
+        <details class="faq-item reveal" open>
           <summary class="faq-q"><span data-i18n="faq.q1">Who can I enroll in a Sante Lakay membership?</span><span class="plus">+</span></summary>
           <p class="faq-a" data-i18n="faq.a1">Any family member living in Haiti — parents, grandparents, siblings, children, or extended family you support. A Family plan covers up to four people, with room to add more.</p>
         </details>
-        <details class="faq-item">
+        <details class="faq-item reveal">
           <summary class="faq-q"><span data-i18n="faq.q2">How does my family in Haiti request help?</span><span class="plus">+</span></summary>
           <p class="faq-a" data-i18n="faq.a2">They call one dispatch number, available 24/7. Our team verifies membership status and coordinates the appropriate response — ground ambulance, air evacuation, or hospital transfer.</p>
         </details>
-        <details class="faq-item">
+        <details class="faq-item reveal">
           <summary class="faq-q"><span data-i18n="faq.q3">Where can I enroll from?</span><span class="plus">+</span></summary>
           <p class="faq-a" data-i18n="faq.a3">Anywhere. Sante Lakay is built for the Haitian diaspora worldwide — the United States, Canada, France, the Dominican Republic, and beyond.</p>
         </details>
-        <details class="faq-item">
+        <details class="faq-item reveal">
           <summary class="faq-q"><span data-i18n="faq.q4">Does this include full health insurance?</span><span class="plus">+</span></summary>
           <p class="faq-a" data-i18n="faq.a4">Not yet. Today's memberships cover emergency coordination, ambulance, and evacuation services. Comprehensive health insurance plans — covering ER visits, hospitalization, and pharmacy — are launching soon.</p>
         </details>
-        <details class="faq-item">
+        <details class="faq-item reveal">
           <summary class="faq-q"><span data-i18n="faq.q5">Can I cancel or change my plan?</span><span class="plus">+</span></summary>
           <p class="faq-a" data-i18n="faq.a5">Yes. You can manage your membership, update payment details, and adjust who's covered directly from your account once your member portal is active.</p>
         </details>
@@ -377,6 +492,7 @@
   </div>
 </footer>
 
+<script src="js/site.js"></script>
 <script>
 const translations = {
   en: {
@@ -388,6 +504,11 @@ const translations = {
     "hero.stat1":"Emergency medical coordination","hero.stat2":"Ambulance & evacuation network","hero.stat3":"Support in your language",
     "hero.card.tag":"Live connection","hero.card.title":"One membership. One lifeline.",
     "hero.card.body":"Wherever you live — Miami, Montréal, Paris, Santo Domingo — your enrollment keeps a direct line open to emergency care for the people you love.",
+    "story.eyebrow":"This Is Why We Exist",
+    "story.line1":"It's 2:14 PM in Miami.","story.line2":"Your phone rings.","story.line3":"Your mother has collapsed in Port-au-Prince.","story.line4":"You are 1,100 miles away.","story.line5":"You make one call.",
+    "story.resolution":"Sante Lakay coordinates the ambulance, the doctors, the hospital — and, if needed, an emergency air evacuation.",
+    "story.closing":"This is what your membership actually buys: someone who answers, and acts, the moment it matters most.",
+    "story.cta":"See Exactly How It Works ↓",
     "about.eyebrow":"What Is Sante Lakay","about.title":"Peace of mind, delivered across the water.",
     "about.body":"Sante Lakay (\"Home Health\") is a medical membership built for Haitians living abroad. You enroll and pay from wherever you are — the United States, Canada, France, the Dominican Republic, anywhere. Your family in Haiti gets a direct line to emergency medical support whenever they need it, backed by a dispatch center and a network of ambulance, air, and ground rescue partners on the ground in Haiti.",
     "about.readmore":"Read More About Us",
@@ -398,6 +519,20 @@ const translations = {
     "how.step1.title":"Choose a plan","how.step1.body":"Pick an Individual or Group membership based on how many family members in Haiti you want covered.",
     "how.step2.title":"Add your family","how.step2.body":"Enter their names and phone numbers in Haiti. They'll receive a message in Kreyòl explaining their new coverage and who to call.",
     "how.step3.title":"We're on call, 24/7","how.step3.body":"Your membership renews automatically. If a medical emergency happens, your family calls one number — day or night.",
+    "journey.eyebrow":"A Common Question","journey.title":"\"What happens when my mother gets sick?\"",
+    "journey.subtitle":"Here's exactly what happens — from the moment you enroll to the moment your family reaches the hospital.",
+    "journey.step1.tag":"Step 1","journey.step1.title":"You enroll","journey.step1.body":"Choose a plan and sign up in minutes, from anywhere in the world.",
+    "journey.step2.tag":"Step 2","journey.step2.title":"Your family is registered","journey.step2.body":"Your mother and any other family members in Haiti are added to the system and notified in Kreyòl.",
+    "journey.step3.tag":"Step 3","journey.step3.title":"A medical emergency happens","journey.step3.body":"A fall, a fever, a crisis — the kind of moment where every minute matters.",
+    "journey.step4.tag":"Step 4","journey.step4.title":"24/7 emergency service answers","journey.step4.body":"Your family calls one number. Our dispatch team in Port-au-Prince picks up immediately, day or night.",
+    "journey.step5.tag":"Step 5","journey.step5.title":"Ground ambulance is dispatched","journey.step5.body":"We coordinate the right response — ambulance, a Guardian Network doctor, or evacuation if needed.",
+    "journey.step6.tag":"Step 6","journey.step6.title":"Your mother reaches the hospital","journey.step6.body":"A patient advocate coordinates her care and keeps your family abroad informed the entire time.",
+    "different.eyebrow":"Why We're Different","different.title":"This isn't insurance. It's a rapid response team for your family.",
+    "different.subtitle":"Most people hear \"medical membership\" and assume it works like insurance. It doesn't — and that difference is the whole point.",
+    "different.left.label":"What People Assume","different.left.title":"\"This is insurance.\"",
+    "different.left.body":"Traditional insurance reimburses medical bills after the fact. You pay first, file a claim, and wait. It doesn't answer the phone when something happens — it just pays for it later, if you're covered.",
+    "different.right.label":"What Sante Lakay Does","different.right.title":"We coordinate the emergency itself.",
+    "different.right.i1":"We answer the phone","different.right.i2":"We send help","different.right.i3":"We organize transport","different.right.i4":"We coordinate evacuations","different.right.i5":"We stay with your family every step of the way",
     "included.eyebrow":"What's Included","included.title":"Every membership includes.",
     "included.s1.title":"24/7 Emergency Coordination","included.s1.body":"A dispatch center standing by around the clock, every day of the year.",
     "included.s2.title":"Ground Ambulance Service","included.s2.body":"Rapid ground transport to the nearest appropriate facility.",
@@ -622,8 +757,72 @@ if(signalTextEl){
 }
 
 // Respect prefers-reduced-motion for the SVG signal animation
-if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+const reduceMotionHome = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduceMotionHome){
   document.querySelectorAll('#lifelineSvg animate').forEach(a => a.setAttribute('repeatCount','0'));
+}
+
+// Story section — sequenced cinematic reveal
+const storySection = document.getElementById('storySection');
+if(storySection){
+  const storyLines = storySection.querySelectorAll('.story-line');
+  const storyResolution = storySection.querySelector('.story-resolution');
+  const storyClosing = storySection.querySelector('.story-closing');
+  const storyCta = storySection.querySelector('.story-cta');
+
+  const revealStorySequence = () => {
+    const step = reduceMotionHome ? 0 : 420;
+    storyLines.forEach((line, i)=>{
+      setTimeout(()=> line.classList.add('is-visible'), i * step);
+    });
+    const afterLines = storyLines.length * step;
+    setTimeout(()=>{ if(storyResolution) storyResolution.classList.add('is-visible'); }, afterLines + (reduceMotionHome?0:250));
+    setTimeout(()=>{ if(storyClosing) storyClosing.classList.add('is-visible'); }, afterLines + (reduceMotionHome?0:650));
+    setTimeout(()=>{ if(storyCta) storyCta.classList.add('is-visible'); }, afterLines + (reduceMotionHome?0:900));
+  };
+
+  if('IntersectionObserver' in window){
+    const storyObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          revealStorySequence();
+          storyObserver.unobserve(storySection);
+        }
+      });
+    }, { threshold: 0.35 });
+    storyObserver.observe(storySection);
+  } else {
+    storyLines.forEach(l => l.classList.add('is-visible'));
+    if(storyResolution) storyResolution.classList.add('is-visible');
+    if(storyClosing) storyClosing.classList.add('is-visible');
+    if(storyCta) storyCta.classList.add('is-visible');
+  }
+}
+
+// Journey timeline — step reveal + progress line growth
+const journeySteps = document.querySelectorAll('.journey-step');
+const journeyProgress = document.getElementById('journeyProgress');
+if(journeySteps.length){
+  if('IntersectionObserver' in window){
+    const journeyObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          const step = entry.target;
+          step.classList.add('is-visible');
+          const index = Array.from(journeySteps).indexOf(step);
+          if(journeyProgress){
+            const pct = ((index + 1) / journeySteps.length) * 100;
+            journeyProgress.style.height = pct + '%';
+          }
+          journeyObserver.unobserve(step);
+        }
+      });
+    }, { threshold: 0.4 });
+    journeySteps.forEach(step => journeyObserver.observe(step));
+  } else {
+    journeySteps.forEach(step => step.classList.add('is-visible'));
+    if(journeyProgress){ journeyProgress.style.height = '100%'; }
+  }
 }
 
 const burger = document.getElementById('burger');

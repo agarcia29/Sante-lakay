@@ -13,18 +13,18 @@
 
 <header>
   <div class="nav">
-    <a href="index.html" class="logo">
+     <a href="#top" class="logo">
       <img src="img/logo-sante-lakay.png" alt="Home">
     </a>
     <nav class="nav-links">
-      <a href="about.html" class="current">About</a>
-      <a href="how-it-works.html">How It Works</a>
-      <a href="plans.html">Plans</a>
-      <a href="index.html#faq">FAQ</a>
-      <a href="index.html#contact">Contact</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="how-it-works.html" data-i18n="nav.how">How It Works</a>
+      <a href="plans.html" data-i18n="nav.plans">Plans</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
     </nav>
     <div class="nav-right">
-      <a href="enroll.html" class="btn btn-primary">Enroll Now</a>
+      <a href="enroll.html" class="btn btn-primary" data-i18n="nav.enroll">Enroll Now</a>
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -46,10 +46,41 @@
     <div class="wrap">
       <div class="eyebrow">Our Mission</div>
       <p class="mission-quote">To provide and sell a medical membership — <span>Sante Lakay, "Home Health"</span> — to the Haitian diaspora everywhere in the world, giving their families in Haiti improved access to health care through a simple monthly or annual plan.</p>
-      <div class="stat-strip">
-        <div class="stat-cell"><span class="n">$3.2B+</span><span class="l">Sent to Haiti in remittances in 2018 alone — roughly a quarter of the country's GDP.</span></div>
-        <div class="stat-cell"><span class="n">2M+</span><span class="l">Haitians living in the United States, with hundreds of thousands more across Canada, France, and the Dominican Republic.</span></div>
-        <div class="stat-cell"><span class="n">24/7</span><span class="l">Dispatch coverage from our partners on the ground in Port-au-Prince.</span></div>
+
+      <div class="stat-grid">
+        <div class="stat-card" data-count data-value="3.2" data-decimals="1" data-prefix="$" data-suffix="B+">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17.5 5.5H9.8a3.3 3.3 0 0 0 0 6.6h4.4a3.3 3.3 0 0 1 0 6.6H6"/></svg>
+          </div>
+          <span class="stat-num"><span class="stat-num-value">0</span></span>
+          <span class="stat-label">Sent to Haiti in remittances in 2018 alone — roughly a quarter of the country's GDP.</span>
+        </div>
+
+        <div class="stat-card" data-count data-value="2" data-decimals="0" data-prefix="" data-suffix="M+">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8" r="3.2"/><path d="M2 20c0-3.6 2.9-6.3 6.5-6.3S15 16.4 15 20"/><circle cx="17" cy="8.6" r="2.6"/><path d="M15.3 13.9c2.8.5 4.7 2.9 4.7 6.1"/></svg>
+          </div>
+          <span class="stat-num"><span class="stat-num-value">0</span></span>
+          <span class="stat-label">Haitians living in the United States, with hundreds of thousands more across Canada, France, and the Dominican Republic.</span>
+        </div>
+
+        <div class="stat-card stat-card-static">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+            <span class="stat-live-dot"></span>
+          </div>
+          <span class="stat-num"><span class="stat-num-value">24/7</span></span>
+          <span class="stat-label">Dispatch coverage from our partners on the ground in Port-au-Prince.</span>
+        </div>
+
+        <div class="stat-card stat-card-highlight" data-count data-value="11.8" data-decimals="1" data-prefix="" data-suffix="M">
+          <span class="stat-tag">The Opportunity</span>
+          <div class="stat-icon stat-icon-accent">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.5-9.2C.7 8.1 2.4 4.5 6 4.1c2-.2 3.6.8 4.9 2.3.4.5 1 .5 1.4 0C13.6 4.9 15.2 3.9 17.2 4.1c3.6.4 5.3 4 3.5 7.7C18.1 16.4 12 21 12 21Z"/></svg>
+          </div>
+          <span class="stat-num"><span class="stat-num-value">0</span></span>
+          <span class="stat-label">People living in Haiti who can benefit from improved access to emergency healthcare services.</span>
+        </div>
       </div>
     </div>
   </section>
@@ -63,15 +94,15 @@
         <p>Haiti is a country and culture built on collectivist values. Interdependence — providing for family members near and far — isn't an obligation, it's a given. Sante Lakay exists to give that instinct a reliable system to work through.</p>
       </div>
       <div class="values-grid">
-        <div class="value-card">
+        <div class="value-card reveal">
           <h3>An honor, not a burden</h3>
           <p>Unlike the individualist cultures of the US and Canada, Haitians abroad see sending money, services, and support home as a privilege and an honor when given the chance to move abroad.</p>
         </div>
-        <div class="value-card">
+        <div class="value-card reveal">
           <h3>Security in uncertain times</h3>
           <p>Haiti regularly experiences economic and political instability. When conditions worsen, diaspora support for family back home has historically increased — Sante Lakay channels that support into reliable medical access.</p>
         </div>
-        <div class="value-card">
+        <div class="value-card reveal">
           <h3>Trust over transfers</h3>
           <p>Rather than trusting that a money transfer will cover a hospital bill correctly, families can rely on Sante Lakay for the full journey — from the first call to the care itself.</p>
         </div>
@@ -88,17 +119,17 @@
         <p>Sante Lakay contracts established organizations in Haiti to fulfill every part of the membership, so members get a real medical response — not just a phone tree.</p>
       </div>
       <div class="partners-grid">
-        <div class="partner-card">
+        <div class="partner-card reveal">
           <span class="p-tag">Dispatch</span>
           <h3>HALO Dispatch Center</h3>
           <p>A 24/7 dispatch center based in Port-au-Prince, built to keep up with incoming emergency calls around the clock.</p>
         </div>
-        <div class="partner-card">
+        <div class="partner-card reveal">
           <span class="p-tag">Rescue & Ambulance</span>
           <h3>HERO Client Rescue S.A.</h3>
           <p>Our ambulance and rescue partnership, providing ground transport, in-country flights, and patient advocacy for every member.</p>
         </div>
-        <div class="partner-card">
+        <div class="partner-card reveal">
           <span class="p-tag">Rural Coverage</span>
           <h3>The Guardian Network</h3>
           <p>Local doctors and medical professionals stationed in areas outside Port-au-Prince, equipped with life-saving equipment and connected to local hospitals.</p>
@@ -116,10 +147,10 @@
         <h2>What Sante Lakay means for Haiti.</h2>
         <p>Beyond individual memberships, Sante Lakay is built to strengthen healthcare access across the country — funded by the same memberships that protect your family.</p>
         <div class="objectives" style="grid-template-columns:1fr; margin-top:24px;">
-          <div class="obj-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Improved access to medical care for members and, over time, their communities</span></div>
-          <div class="obj-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Health initiatives within rural and underserved communities</span></div>
-          <div class="obj-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Employment for local Haitian doctors, dispatchers, and rescue teams</span></div>
-          <div class="obj-item" style="border-bottom:none;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Capacity building alongside partners like HERO and HALO, established in Haiti</span></div>
+          <div class="obj-item reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Improved access to medical care for members and, over time, their communities</span></div>
+          <div class="obj-item reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Health initiatives within rural and underserved communities</span></div>
+          <div class="obj-item reveal"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Employment for local Haitian doctors, dispatchers, and rescue teams</span></div>
+          <div class="obj-item reveal" style="border-bottom:none;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Capacity building alongside partners like HERO and HALO, established in Haiti</span></div>
         </div>
       </div>
     </div>
@@ -134,17 +165,17 @@
         <p>South Florida is home to one of the largest Haitian communities in the world, and it gives Sante Lakay a stable base to support operations in Haiti — especially when things get difficult there.</p>
       </div>
       <div class="office-grid">
-        <div class="office-card">
+        <div class="office-card reveal">
           <span class="o-num">01</span>
           <h3>Banking support</h3>
           <p>When banks in Haiti close during political or economic crises, our USA-based operations can keep supporting payroll, fuel, and other essential costs.</p>
         </div>
-        <div class="office-card">
+        <div class="office-card reveal">
           <span class="o-num">02</span>
           <h3>Logistics support</h3>
           <p>Proximity to MIA and FLL airports lets us source and ship food, medical supplies, and equipment to our partners even when local supply chains are disrupted.</p>
         </div>
-        <div class="office-card">
+        <div class="office-card reveal">
           <span class="o-num">03</span>
           <h3>Volunteer recruiting</h3>
           <p>We recruit and vet Haitian-American nurses, EMTs, and paramedics interested in supporting the mission, alongside students in nursing and pre-med programs.</p>
@@ -180,6 +211,7 @@
   </div>
 </footer>
 
+<script src="js/site.js"></script>
 <script>
 document.getElementById('burger').addEventListener('click', ()=>{
   const nav = document.querySelector('.nav-links');
@@ -190,6 +222,52 @@ document.getElementById('burger').addEventListener('click', ()=>{
     nav.style.padding='20px 32px'; nav.style.borderBottom='1px solid #D9E1E8'; nav.style.gap='18px';
   }
 });
+
+// Stat cards — reveal on scroll + animated count-up
+const statCards = document.querySelectorAll('.stat-card');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function animateCount(card){
+  const valueEl = card.querySelector('.stat-num-value');
+  const target = parseFloat(card.getAttribute('data-value'));
+  const decimals = parseInt(card.getAttribute('data-decimals') || '0', 10);
+  const prefix = card.getAttribute('data-prefix') || '';
+  const suffix = card.getAttribute('data-suffix') || '';
+
+  if(reduceMotion){
+    valueEl.textContent = prefix + target.toFixed(decimals) + suffix;
+    return;
+  }
+
+  const duration = 1700;
+  const start = performance.now();
+  function tick(now){
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    valueEl.textContent = prefix + (target * eased).toFixed(decimals) + suffix;
+    if(progress < 1){ requestAnimationFrame(tick); }
+    else { valueEl.textContent = prefix + target.toFixed(decimals) + suffix; }
+  }
+  requestAnimationFrame(tick);
+}
+
+if(statCards.length){
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach((entry, i)=>{
+      if(entry.isIntersecting){
+        const card = entry.target;
+        const delay = reduceMotion ? 0 : Array.from(statCards).indexOf(card) * 90;
+        setTimeout(()=>{
+          card.classList.add('is-visible');
+          if(card.hasAttribute('data-count')){ animateCount(card); }
+        }, delay);
+        observer.unobserve(card);
+      }
+    });
+  }, { threshold: 0.35 });
+
+  statCards.forEach(card => observer.observe(card));
+}
 </script>
 </body>
 </html>
